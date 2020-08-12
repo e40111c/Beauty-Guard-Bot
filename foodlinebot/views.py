@@ -30,7 +30,10 @@ def callback(request):
  
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
-                uid = event.source.user_id
+                try:
+                    uid = event.source.user_id
+                except:
+                    uid = 'id fail'
                 if event.message.text == '分析':
                     message = TemplateSendMessage(
                         alt_text='分析Template無法顯示',
@@ -52,8 +55,10 @@ def callback(request):
                         )
                     )
                 elif event.message.text == '手動輸入':
-                    updatestate(userid,5)
-                    message = '成功儲存'
+                    try:
+                        updatestate(userid,5)
+                    except:
+                        message = 'database fail!'
                 else:
                     message = event.message.text
                 line_bot_api.reply_message(event.reply_token, message)
