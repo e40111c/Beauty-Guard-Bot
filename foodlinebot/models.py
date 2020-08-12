@@ -57,22 +57,8 @@ class CosmeticProduct(models.Model):
     class Meta:
         db_table = 'cosmetic_product'
         
-        
-        
-        
-class CosmeticIngredient(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    pname = models.CharField(max_length=255)
-    ingredient = models.TextField(blank=True, null=True)
-    acne = models.TextField(blank=True, null=True)
-    pchar = models.TextField(blank=True, null=True)
-    dalton = models.TextField(blank=True, null=True)
-    safeness = models.TextField(blank=True, null=True)
-    stimulation = models.TextField(blank=True, null=True)
-    score = models.TextField(blank=True, null=True)
 
-    class Meta:
-        db_table = 'cosmetic_ingredient'
+
         
         
 
