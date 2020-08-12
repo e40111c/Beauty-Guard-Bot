@@ -32,3 +32,18 @@ class Product(models.Model):
 
     class Meta:
         db_table = "CustomerProduct"
+        
+class CosmeticProduct(models.Model):
+    kind = models.TextField()
+    brand = models.TextField()
+    pname = models.TextField()
+    char = models.TextField()
+    price = models.IntegerField()
+
+    class Meta:
+        db_table = 'Cosmetic_Product'
+        
+     
+        
+        
+        
