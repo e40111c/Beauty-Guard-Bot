@@ -1,10 +1,10 @@
 from django.db import models
 
 
-class CustomerStatus(models.Model):
-    uid = models.CharField(max_length=255, blank=True, null=True)  # 地區
-    continuous = models.IntegerField(blank=True, null=True)  # 景點名稱
-    nid = models.AutoField(primary_key=True)  # 地址
+class Location(models.Model):
+    area = models.CharField(max_length=20)  # 地區
+    name = models.CharField(max_length=100)  # 景點名稱
+    address = models.CharField(max_length=500)  # 地址
 
 
         

@@ -56,9 +56,11 @@ def callback(request):
                     )
                 elif event.message.text == '手動輸入':
                     try:
-                        updatestate(userid,5)
+                        loc = Locations.objects.create(area='ww',name='ss',address='what')
+                        message = 'success!'
                     except:
                         message = 'database fail!'
+                    line_bot_api.reply_message(event.reply_token, message)
                 else:
                     message = event.message.text
                 line_bot_api.reply_message(event.reply_token, message)
@@ -69,11 +71,4 @@ def callback(request):
 
 
 
-
-def updatestate(userid,countin):
-    states = CustomerStatus.objects.filter(uid=userid)
-    if not states:
-        states = CustomerStatus.objects.create(uid=userid, continuous=countin)
-    else:
-        states = CustomerStatus.objects.filter(uid=userid).update(continuous=countin)
 # Create your views here.
