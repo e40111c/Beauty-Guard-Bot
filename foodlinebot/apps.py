@@ -1,5 +1,5 @@
 from django.apps import AppConfig
 
 
-class FoodlinebotConfig(AppConfig):
-    name = 'foodlinebot'
+class MusicsConfig(AppConfig):
+    name = 'musics'
