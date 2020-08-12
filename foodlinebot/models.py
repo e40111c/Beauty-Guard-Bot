@@ -5,15 +5,6 @@ from django.db import models
 
 
 # Create your models here.
-class Music(models.Model):
-    song = models.TextField(default="song")
-    singer = models.TextField(default="AKB48")
-    last_modify_date = models.DateTimeField(auto_now=True)
-    state = models.IntegerField()
-    created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        db_table = "music"
 
 class CustomerState(models.Model):
     uid = models.TextField()
@@ -22,7 +13,7 @@ class CustomerState(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table = "CustomerState"
+        db_table = "Customer_State"
 
 class Product(models.Model):
     uid = models.TextField()
@@ -31,7 +22,7 @@ class Product(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        db_table = "CustomerProduct"
+        db_table = "Customer_Product"
         
 class CosmeticProduct(models.Model):
     kind = models.TextField()
@@ -43,7 +34,27 @@ class CosmeticProduct(models.Model):
     class Meta:
         db_table = 'Cosmetic_Product'
         
-     
-        
-        
+class UserProduct(models.Model):
+    uid = models.TextField()
+    pname = models.TextField()
+    pbrand = models.TextField()
+    fit_prod = models.TextField()  # Field name made lowercase.
+    unfit_prod = models.TextField()  # Field name made lowercase.
+    reg_date = models.DateTimeField()
+
+    class Meta:
+        db_table = 'User_Product'
+
+class CosmeticIngredient(models.Model):
+    pname = models.TextField()
+    ingredient = models.TextField()
+    acne = models.TextField()
+    pchar = models.TextField()
+    dalton = models.TextField()
+    safeness = models.TextField()
+    stimulation = models.TextField()
+    score = models.TextField()
+
+    class Meta:
+        db_table = 'Cosmetic_Ingredient'      
         
