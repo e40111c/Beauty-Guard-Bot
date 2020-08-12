@@ -32,7 +32,80 @@ def callback(request):
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 uid = event.source.user_id
-                if event.message.text == '分析':
+                
+                if event.message.text == '紀錄':
+                    message = TemplateSendMessage(
+                        alt_text='記錄Template無法顯示',
+                        template=ButtonsTemplate(
+                            thumbnail_image_url='https://cheeek.me/wp-content/uploads/2018/09/117244283.jpg',
+                            title='紀錄',
+                            text='紀錄之產品將存於已記錄',
+                            actions=[
+                                MessageTemplateAction(
+                                    label='手動輸入', text='手動輸入'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描QRcode', text='掃描QRcode'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描產品條碼', text='掃描產品條碼'
+                                ),
+                                MessageTemplateAction(
+                                    label='查看已記錄', text='查看已記錄'
+                                )
+                            ]
+                        )
+                    )
+
+                elif event.message.text == '搜尋':
+                    message = TemplateSendMessage(
+                        alt_text='搜尋Template無法顯示',
+                        template=ButtonsTemplate(
+                            thumbnail_image_url='https://cheeek.me/wp-content/uploads/2018/09/117244283.jpg',
+                            title='搜尋',
+                            text='僅搜尋產品成分',
+                            actions=[
+                                MessageTemplateAction(
+                                    label='手動輸入', text='手動輸入'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描QRcode', text='掃描QRcode'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描產品條碼', text='掃描產品條碼'
+                                )
+                            ]
+                        )
+                    )
+
+                elif event.message.text == '掃描QRcode':
+                    message = TemplateSendMessage(
+                        alt_text='掃描QRCode Template無法顯示',
+                        template=ButtonsTemplate(
+                            title='掃描QRCode',
+                            text='進入後點選下方的掃描行動條碼並將發票掃描後之文字檔傳回對話訊息',
+                            actions=[
+                                URITemplateAction(
+                                    label='掃描QRCode', uri='https://line.me/R/nv/QRCode'
+                                )
+                            ]
+                        )
+                    )
+                elif event.message.text == '掃描產品條碼':
+                    message = TemplateSendMessage(
+                        alt_text='掃描產品條碼Template無法顯示',
+                        template=ButtonsTemplate(
+                            title='掃描產品條碼',
+                            text='進入後將產品條碼拍照後轉為文字並將條碼之對應數字傳回對話訊息',
+                            actions=[
+                                URITemplateAction(
+                                    label='掃描產品條碼', uri='https://line.me/R/nv/camera/ocr'
+                                )
+                            ]
+                        )
+                    )
+
+                elif event.message.text == '分析':
                     message = TemplateSendMessage(
                         alt_text='分析Template無法顯示',
                         template=ButtonsTemplate(
