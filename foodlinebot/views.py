@@ -27,14 +27,43 @@ def callback(request):
  
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
-                line_bot_api.reply_message(  # 回復傳入的訊息文字
-                    event.reply_token,
-                    TextSendMessage(text=event.message.text)
-                )
+                uid = event.source.user_id
+                if event.message.text == '分析':
+                    message = TemplateSendMessage(
+                        alt_text='分析Template無法顯示',
+                        template=ButtonsTemplate(
+                            thumbnail_image_url='https://cheeek.me/wp-content/uploads/2018/09/117244283.jpg',
+                            title='分析',
+                            text='分析與已紀錄之產品成分是否適合',
+                            actions=[
+                                MessageTemplateAction(
+                                    label='手動輸入', text='手動輸入'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描QRcode', text='掃描QRcode'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描產品條碼', text='掃描產品條碼'
+                                )
+                            ]
+                        )
+                    )
+                elif event.message.text == '手動輸入':
+                    updatestate(userid,1,0)
+                    message = '成功儲存'
+                line_bot_api.reply_message(event.reply_token, message)
+
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
 
 
 
+
+def updatestate(userid,count,countin):
+    states = CustomerStatus.objects.filter(uid=userid)
+    if not states:
+        states = CustomerStatus.objects.create(uid=userid, continuous=countin, cnt=count)
+    else:
+        states = CustomerStatus.objects.filter(uid=userid).update(continuous=countin,cnt=count)
 # Create your views here.
