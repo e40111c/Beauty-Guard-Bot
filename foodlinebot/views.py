@@ -226,6 +226,10 @@ def Compare_All_Product(userid,qName):
             msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
             
     msg += '成功找到\n'+qName+'\n'
- 
+    try:
+        data = UserProduct.objects.filter(uid=userid)
+    except:
+        msg += '找不到id'
+    
         
     return msg
