@@ -227,7 +227,7 @@ def Compare_All_Product(userid,qName):
             msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
     msg += '成功找到\n'+qName+'\n'
     
-    data = customer_product.objects.filter(uid = user_id)
+    data = User_Product.objects.filter(uid = userid)
  
     try:
         for i in range(len(data)):
@@ -238,4 +238,4 @@ def Compare_All_Product(userid,qName):
     except:
         msg += '成分搜尋有問題'
         
-return msg
+    return msg
