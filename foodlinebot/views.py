@@ -228,6 +228,10 @@ def Compare_All_Product(userid,qName):
     msg += '成功找到\n'+qName+'\n'
     try:
         data = UserProduct.objects.filter(uid=userid)
+        for i in range(len(data)):
+            fitprod = data[i].fit_prod
+            unfitprod = data[i].unfit_prod
+        msg += '成分資料獲取'
     except:
         msg += '找不到id'
     
