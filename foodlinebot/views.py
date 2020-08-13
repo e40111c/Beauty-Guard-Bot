@@ -28,7 +28,7 @@ def callback(request):
             return HttpResponseForbidden()
         except LineBotApiError:
             return HttpResponseBadRequest()
-
+    
         for event in events:
             if isinstance(event, MessageEvent):  # 如果有訊息事件
                 uid = event.source.user_id
@@ -130,6 +130,14 @@ def callback(request):
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
+                
+                elif event.message.text == '分析產品':
+                    prc = get_productDB(uid)
+                    pn = Compare_All_Product(uid,prc[1].pname)
+                    pn += '分析結束!!!!'
+                    message = TextSendMessage(text=pn)
+                
+                
                 else:
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
@@ -175,6 +183,65 @@ def message_continuous(countin,uid,userMessage):
         updatestate(uid, 0, 0)
         message = TextSendMessage(text = '已儲存' + str(msg))
     return message
+
+
+
+def Compare_All_Product(userid,qName):
+    #從資料庫取得資料
+    msg = ''
+    cbt = 0
+    try:
+        allProd = Product.objects.filter(uid=userid)
+    except:
+        msg = '使用者找產品有問題\n'
+    found = -1
+    for i in range(1,len(allProd)):
+        if qName == allProd[i].pname :
+            cbt += 1
+            try:
+                ingred = CosmeticIngredient.objects.get(pname=qName)
+            except:
+                msg += '資料庫找名字有問題\n'
+            try:
+                qIngre = ingred.ingredient.split(',')
+                #if qIngre.index('') != -1: qIngre.remove('')
+            except:
+                msg += '拆解有問題\n'
+            found = i
+            break
+        else:
+            msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
+    msg += '成功找到\n'+qName+'\n'
+
+
+
+    checkProd = []
+    checkIngre = []
+    # Start to compare suitable & nonsuitable
+    data = UserProduct.objects.filter(uid=userid)
+    try:
+
+        unfitProd = data.unfit_prod
+    except:
+        msg += '不能用get要用filter取值\n'
+    return msg
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def update_productDB(count,uid,userMessage):
 
