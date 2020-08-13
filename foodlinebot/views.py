@@ -141,7 +141,9 @@ def callback(request):
                 else:
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
-                line_bot_api.reply_message(event.reply_token, message)
+                ok[0] = message
+                ok[1] = 'ok'
+                line_bot_api.reply_message(event.reply_token, ok)
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
