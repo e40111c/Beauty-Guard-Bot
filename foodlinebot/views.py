@@ -186,6 +186,20 @@ def message_continuous(countin,uid,userMessage):
 
 
 
+def update_productDB(count,uid,userMessage):
+
+    if count == 1:
+        product = Product.objects.create(uid=uid,pbrand=userMessage)
+    else:
+        product = Product.objects.create(uid=uid,pname=userMessage)
+
+
+def get_productDB(userid):
+    product = Product.objects.filter(uid=userid)
+    return product
+
+
+
 def Compare_All_Product(userid,qName):
     #從資料庫取得資料
     msg = ''
@@ -213,44 +227,4 @@ def Compare_All_Product(userid,qName):
             msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
     msg += '成功找到\n'+qName+'\n'
 
-
-
-    checkProd = []
-    checkIngre = []
-    # Start to compare suitable & nonsuitable
-    data = UserProduct.objects.filter(uid=userid)
-    try:
-
-        unfitProd = data.unfit_prod
-    except:
-        msg += '不能用get要用filter取值\n'
     return msg
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def update_productDB(count,uid,userMessage):
-
-    if count == 1:
-        product = Product.objects.create(uid=uid,pbrand=userMessage)
-    else:
-        product = Product.objects.create(uid=uid,pname=userMessage)
-
-
-def get_productDB(userid):
-    product = Product.objects.filter(uid=userid)
-    return product
