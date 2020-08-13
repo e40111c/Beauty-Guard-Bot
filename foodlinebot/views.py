@@ -235,7 +235,7 @@ def Compare_All_Product(userid,qName):
           unfitprod.append(data[i].unfit_Prod)
         
         msg += 'fitunfit suc!'
-    else:
+    except:
         msg += '成分搜尋有問題'
     
     
