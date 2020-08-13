@@ -203,7 +203,6 @@ def get_productDB(userid):
 def Compare_All_Product(userid,qName):
     #從資料庫取得資料
     msg = ''
-    cbt = 0
     try:
         allProd = Product.objects.filter(uid=userid)
     except:
@@ -225,9 +224,8 @@ def Compare_All_Product(userid,qName):
             break
         else:
             msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
+            
     msg += '成功找到\n'+qName+'\n'
-    
-    data = User_Product.objects.filter(uid = userid)
  
         
     return msg
