@@ -226,5 +226,16 @@ def Compare_All_Product(userid,qName):
         else:
             msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
     msg += '成功找到\n'+qName+'\n'
-
+    
+    data = customer_product.objects.filter(uid = user_id)
+ 
+    try:
+            for i in range(len(data)):
+                fitprod.append(data[i].fit_Prod)
+                unfitprod.append(data[i].unfit_Prod)
+        msg += fitprod[0]
+    else:
+        msg+= '成分搜尋有問題'
+    
+    
     return msg
