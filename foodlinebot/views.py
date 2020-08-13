@@ -210,7 +210,7 @@ def Compare_All_Product(userid,qName):
     found = -1
     for i in range(1,len(allProd)):
         if qName == allProd[i].pname :
-            cbt += 1
+            
             try:
                 ingred = CosmeticIngredient.objects.get(pname=qName)
             except:
