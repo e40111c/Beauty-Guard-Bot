@@ -233,7 +233,7 @@ def Compare_All_Product(userid,qName):
             for i in range(len(data)):
                 fitprod.append(data[i].fit_Prod)
                 unfitprod.append(data[i].unfit_Prod)
-        msg += str(fitprod[0])
+        msg += fitprod
         msg += 'fitunfit suc!'
     else:
         msg+= '成分搜尋有問題'
