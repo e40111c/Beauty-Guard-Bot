@@ -129,6 +129,7 @@ def callback(request):
                     updatestate(uid,1,0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
+                    ok = '這是第二句'
                     line_bot_api.reply_message(event.reply_token, message)
                 
                 elif event.message.text == '分析產品':
@@ -142,6 +143,7 @@ def callback(request):
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                 line_bot_api.reply_message(event.reply_token, message)
+                line_bot_api.reply_message(event.reply_token, ok)
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
