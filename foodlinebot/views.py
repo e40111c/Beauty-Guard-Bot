@@ -237,6 +237,5 @@ def Compare_All_Product(userid,qName):
         msg += 'fitunfit suc!'
     except:
         msg += '成分搜尋有問題'
-    
-    
-    return msg
+        
+return msg
