@@ -232,6 +232,7 @@ def Compare_All_Product(userid,qName):
             fitprod = data[i].fit_prod
             unfitprod = data[i].unfit_prod
         msg += '成分資料獲取'
+        msg += fitprod
     except:
         msg += '找不到id'
     
