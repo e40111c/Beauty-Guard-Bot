@@ -231,10 +231,10 @@ def Compare_All_Product(userid,qName):
         for i in range(len(data)):
             fitprod = data[i].fit_prod
             unfitprod = data[i].unfit_prod
-        msg += '成分資料獲取'
-        msg += fitprod
+        msg += '成分資料獲取\n'
+        msg += fitprod + '\n'
     except:
-        msg += '找不到id'
+        msg += '找不到id\n'
     
         
     return msg
