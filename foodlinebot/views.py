@@ -229,13 +229,5 @@ def Compare_All_Product(userid,qName):
     
     data = User_Product.objects.filter(uid = userid)
  
-    try:
-        for i in range(len(data)):
-          fitprod.append(data[i].fit_Prod)
-          unfitprod.append(data[i].unfit_Prod)
-        
-        msg += 'fitunfit suc!'
-    except:
-        msg += '成分搜尋有問題'
         
     return msg
