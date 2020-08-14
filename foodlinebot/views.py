@@ -183,12 +183,6 @@ def message_continuous(countin, uid, userMessage):
         update_productDB(countin, uid, userMessage)
         product = get_productDB(uid)
         msg = ''
-        if (len(product) > 1):
-            msg += '品牌' + product[len(product) - 1].pbrand + '\n'
-            msg += '商品名稱' + product[len(product) - 1].pname + '\n'
-        else:
-            msg += '品牌' + product[0].pbrand + '\n'
-            msg += '商品名稱' + product[0].pname + '\n'
         updatestate(uid, 0, 0)
         message = TextSendMessage(text='已儲存' + userMessage + '產品')
     return message
