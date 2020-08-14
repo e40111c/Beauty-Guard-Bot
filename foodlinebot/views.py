@@ -204,38 +204,35 @@ def get_productDB(userid):
 def Compare_All_Product(userid,qName):
     #從資料庫取得資料
     msg = ''
+    qIngre = []
     try:
-        allProd = Product.objects.filter(uid=userid)
+        ingred = CosmeticIngredient.objects.get(pname=qName)
+        qIngre = ingred.ingredient.split(',')
+        msg += '成功找到\n'+qName+'\n'
     except:
-        msg = '使用者找產品有問題\n'
-    found = -1
-    for i in range(1,len(allProd)):
-        if qName == allProd[i].pname :
-            
-            try:
-                ingred = CosmeticIngredient.objects.get(pname=qName)
-            except:
-                msg += '資料庫找名字有問題\n'
-            try:
-                qIngre = ingred.ingredient.split(',')
-                #if qIngre.index('') != -1: qIngre.remove('')
-            except:
-                msg += '拆解有問題\n'
-            found = i
-            break
-        else:
-            msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
-            
-    msg += '成功找到\n'+qName+'\n'
-    try:
+        msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
+
+
+    checkIngre = []
+    # Start to compare suitable & nonsuitable
+
+    if len(qIngre) > 0:
         data = UserProduct.objects.filter(uid=userid)
-        for i in range(len(data)):
-            fitprod = data[i].fit_prod
-            unfitprod = data[i].unfit_prod
-        msg += '成分資料獲取\n'
-        msg += fitprod + '\n'
-    except:
-        msg += '找不到id\n'
-    
-        
+        for i in range(len(qIngre)):
+            try:
+                for j in range(len(data)):
+                    try:
+                        unfitprod = data[j].unfit_prod
+                        unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod).ingredient.split(',')
+                    except:
+                        msg += 'unfitprod出錯'
+                    for k in range(len(unfit_Ingre)):
+                        if unfit_Ingre[k].find(qIngre[i]) != -1:
+                            checkIngre.append(unfit_Ingre[k])
+                            break
+                msg += '已適合分析完成!'
+            except:
+                msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
+                break
+
     return msg
