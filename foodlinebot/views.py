@@ -42,7 +42,7 @@ def callback(request):
                             text='紀錄之產品將存於已記錄',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='紀錄產品=>手動輸入'
+                                    label='手動輸入', text='紀錄產品'
                                 ),
                                 MessageTemplateAction(
                                     label='掃描QRcode', text='掃描QRcode'
@@ -66,7 +66,7 @@ def callback(request):
                             text='僅搜尋產品成分',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='搜尋產品=>手動輸入'
+                                    label='手動輸入', text='搜尋產品'
                                 ),
                                 MessageTemplateAction(
                                     label='掃描QRcode', text='掃描QRcode'
@@ -88,7 +88,7 @@ def callback(request):
                             text='分析與已紀錄之產品成分是否適合',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='分析產品=>手動輸入'
+                                    label='手動輸入', text='分析產品'
                                 ),
                                 MessageTemplateAction(
                                     label='掃描QRcode', text='掃描QRcode'
@@ -129,12 +129,12 @@ def callback(request):
                         )
                     )
 
-                elif event.message.text == '紀錄產品=>手動輸入':
+                elif event.message.text == '紀錄產品':
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
 
-                elif event.message.text == '搜尋產品=>手動輸入':
+                elif event.message.text == '搜尋產品':
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
