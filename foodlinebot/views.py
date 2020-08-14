@@ -42,7 +42,7 @@ def callback(request):
                             text='紀錄之產品將存於已記錄',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='手動輸入'
+                                    label='手動輸入', text='紀錄產品=>手動輸入'
                                 ),
                                 MessageTemplateAction(
                                     label='掃描QRcode', text='掃描QRcode'
@@ -66,7 +66,7 @@ def callback(request):
                             text='僅搜尋產品成分',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='手動輸入'
+                                    label='手動輸入', text='搜尋產品=>手動輸入'
                                 ),
                                 MessageTemplateAction(
                                     label='掃描QRcode', text='掃描QRcode'
@@ -78,6 +78,29 @@ def callback(request):
                         )
                     )
 
+
+                elif event.message.text == '分析':
+                    message = TemplateSendMessage(
+                        alt_text='分析Template無法顯示',
+                        template=ButtonsTemplate(
+                            thumbnail_image_url='https://cheeek.me/wp-content/uploads/2018/09/117244283.jpg',
+                            title='分析',
+                            text='分析與已紀錄之產品成分是否適合',
+                            actions=[
+                                MessageTemplateAction(
+                                    label='手動輸入', text='分析產品=>手動輸入'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描QRcode', text='掃描QRcode'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描產品條碼', text='掃描產品條碼'
+                                )
+                            ]
+                        )
+                    )
+                    
+                
                 elif event.message.text == '掃描QRcode':
                     message = TemplateSendMessage(
                         alt_text='掃描QRCode Template無法顯示',
@@ -91,6 +114,7 @@ def callback(request):
                             ]
                         )
                     )
+                    
                 elif event.message.text == '掃描產品條碼':
                     message = TemplateSendMessage(
                         alt_text='掃描產品條碼Template無法顯示',
@@ -104,28 +128,13 @@ def callback(request):
                             ]
                         )
                     )
-
-                elif event.message.text == '分析':
-                    message = TemplateSendMessage(
-                        alt_text='分析Template無法顯示',
-                        template=ButtonsTemplate(
-                            thumbnail_image_url='https://cheeek.me/wp-content/uploads/2018/09/117244283.jpg',
-                            title='分析',
-                            text='分析與已紀錄之產品成分是否適合',
-                            actions=[
-                                MessageTemplateAction(
-                                    label='手動輸入', text='手動輸入'
-                                ),
-                                MessageTemplateAction(
-                                    label='掃描QRcode', text='掃描QRcode'
-                                ),
-                                MessageTemplateAction(
-                                    label='掃描產品條碼', text='掃描產品條碼'
-                                )
-                            ]
-                        )
-                    )
-                elif event.message.text == '手動輸入':
+                    
+                elif event.message.text == '紀錄產品=>手動輸入':
+                    updatestate(uid,1,0)
+                    status = get_statusDB(uid)
+                    message = message_continuous(status.continuous, uid, event.message.text)
+                    
+                elif event.message.text == '搜尋產品=>手動輸入':
                     updatestate(uid,1,0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
@@ -202,7 +211,7 @@ def get_productDB(userid):
 
 
 def Compare_All_Product(userid,qName):
-    #從資料庫取得資料
+        #從資料庫取得資料
     msg = ''
     qIngre = []
     try:
@@ -215,7 +224,7 @@ def Compare_All_Product(userid,qName):
 
     checkIngre = []
     # Start to compare suitable & nonsuitable
-
+    cnt = 0
     if len(qIngre) > 0:
         data = UserProduct.objects.filter(uid=userid)
         for i in range(len(qIngre)):
@@ -227,12 +236,36 @@ def Compare_All_Product(userid,qName):
                     except:
                         msg += 'unfitprod出錯'
                     for k in range(len(unfit_Ingre)):
-                        if unfit_Ingre[k].find(qIngre[i]) != -1:
-                            checkIngre.append(unfit_Ingre[k])
-                            break
-                msg += '已適合分析完成!'
+                       if unfit_Ingre[k].find(qIngre[i]) != -1:
+                           checkIngre.append(unfit_Ingre[k])
+                           break
             except:
                 msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
                 break
+        for i in range(len(checkIngre)):
+            try:
+                cnt = len(checkIngre)
+                for j in range(len(data)):
+                    try:
+                        fitprod = data[j].fit_prod
+                        fit_Ingre = CosmeticIngredient.objects.get(pname=fitprod).ingredient.split(',')
+                    except:
+                        msg += 'fit出錯'
+                    for k in range(len(fit_Ingre)):
+                        if fit_Ingre[k].find(checkIngre[i]) != -1:
+                            cnt -= 1
+                            break
+
+            except:
+                msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用分析功能喔！'
+                break
+
+    try:
+        if cnt != len(checkIngre):
+            msg += '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！\n'
+        else:
+            msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！\n'
+    except:
+        msg += '錯誤發生，請重新點選分析！\n'
 
     return msg
