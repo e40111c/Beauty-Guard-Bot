@@ -221,13 +221,13 @@ def Compare_All_Product(userid, qName):
                 for j in range(len(data)):
                     try:
                         unfitprod = data[j].unfit_prod
-                        unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod).ingredient.split(',')
+                        #unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod).ingredient.split(',')
                     except:
                         msg += 'unfitprod出錯\n'
-                    for k in range(len(unfit_Ingre)):
-                        if unfit_Ingre[k].find(qIngre[i]) != -1:
-                            checkIngre.append(unfit_Ingre[k])
-                            break
+                    #for k in range(len(unfit_Ingre)):
+                     #   if unfit_Ingre[k].find(qIngre[i]) != -1:
+                      #      checkIngre.append(unfit_Ingre[k])
+                       #     break
             except:
                 msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
                 break
