@@ -13,12 +13,10 @@ from .models import *
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
-
 def hello_view(request):
     return render(request, 'hello_django.html', {
         'data': "Hello Django"
     })
-
 
 
 
@@ -51,8 +49,8 @@ def callback(request):
                                 MessageTemplateAction(
                                     label='手動輸入', text='紀錄產品'
                                 ),
-                                MessageTemplateAction(
-                                    label='掃描QRcode', text='掃描QRcode'
+                                URITemplateAction(  # 這行要改
+                                    label='掃描QRcode(限Android)', uri='https://liff.line.me/1654432888-3nAgx1WL'  # 這行要改
                                 ),
                                 MessageTemplateAction(
                                     label='掃描產品條碼', text='掃描產品條碼'
@@ -75,8 +73,8 @@ def callback(request):
                                 MessageTemplateAction(
                                     label='手動輸入', text='搜尋產品'
                                 ),
-                                MessageTemplateAction(
-                                    label='掃描QRcode', text='掃描QRcode'
+                                URITemplateAction(  # 這行要改
+                                    label='掃描QRcode(限Android)', uri='https://liff.line.me/1654432888-3nAgx1WL'  # 這行要改
                                 ),
                                 MessageTemplateAction(
                                     label='掃描產品條碼', text='掃描產品條碼'
@@ -97,8 +95,8 @@ def callback(request):
                                 MessageTemplateAction(
                                     label='手動輸入', text='分析產品'
                                 ),
-                                MessageTemplateAction(
-                                    label='掃描QRcode', text='掃描QRcode'
+                                URITemplateAction(  # 這行要改
+                                    label='掃描QRcode(限Android)', uri='https://liff.line.me/1654432888-3nAgx1WL'  # 這行要改
                                 ),
                                 MessageTemplateAction(
                                     label='掃描產品條碼', text='掃描產品條碼'
@@ -113,10 +111,10 @@ def callback(request):
                         alt_text='掃描QRCode Template無法顯示',
                         template=ButtonsTemplate(
                             title='掃描QRCode',
-                            text='進入後點選下方的掃描行動條碼並將發票掃描後之文字檔傳回對話訊息',
+                            text = '對準發票上之QRCode，掃描後結果即顯示於聊天室',
                             actions=[
                                 URITemplateAction(
-                                    label='掃描QRCode', uri='https://line.me/R/nv/QRCode'
+                                    label='掃描QRCode(限Android)', uri='https://liff.line.me/1654432888-3nAgx1WL'  # 這行要改
                                 )
                             ]
                         )
@@ -145,7 +143,12 @@ def callback(request):
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
-
+                elif event.message.text == '圖片':
+                    message = []
+                    message.append(ImageSendMessage(original_content_url='https://5b76fcb485d9.ngrok.io/static/skincare_02.jpg',
+                                               preview_image_url='https://5b76fcb485d9.ngrok.io/static/skincare_02.jpg'))
+                    message.append(TextSendMessage(text='加個文字吧?'))
+                    line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析產品':
                     prc = get_productDB(uid)
@@ -157,7 +160,7 @@ def callback(request):
                         status = get_statusDB(uid)
                         message = message_continuous(status.continuous, uid, event.message.text)
                     except:
-                        message = TextSendMessage(text='請遵照介面操作，勿隨意輸入無效訊息')
+                        pass
                 line_bot_api.reply_message(event.reply_token, message)
         return HttpResponse()
     else:
@@ -179,19 +182,48 @@ def get_statusDB(userid):
 
 
 def message_continuous(countin, uid, userMessage):
-    if countin == 0:
+    if countin == 0 and userMessage == '紀錄產品':
         updatestate(uid, 1, 1)
         message = TextSendMessage(text='請輸入你想要紀錄的商品品牌')
     elif countin == 1:
         update_productDB(countin, uid, userMessage)
         updatestate(uid, 1, 2)
         message = TextSendMessage(text='請輸入你想要紀錄的商品名稱')
+
+    elif countin == 0 and userMessage == '搜尋產品':
+        updatestate(uid, 1, 4)
+        message = TextSendMessage(text='請輸入你想要搜尋的產品品牌')
+    elif countin == 4:
+        updatestate(uid, 1, 5)
+        message = TextSendMessage(text='請輸入你想要搜尋的商品名稱')
+    elif countin == 5:
+        res = ''
+        result = search_productDB(userMessage)
+        if type(result) == str:
+            result = '查無此產品資訊'
+        else:
+            sp = result.ingredient.split(',')
+            for i in sp:
+                if i == '"':
+                    pass
+                else:
+                    res += i + '\n'
+            result = '已找到'+userMessage+'成分\n'+res
+        updatestate(uid, 0, 0)
+        message = TextSendMessage(text=result)
     else:
         update_productDB(countin, uid, userMessage)
         product = get_productDB(uid)
         msg = ''
+        if (len(product) > 1):
+            msg += '品牌' + product[len(product) - 1].pbrand + '\n'
+            msg += '商品名稱' + product[len(product) - 1].pname + '\n'
+        else:
+            msg += '品牌' + product[0].pbrand + '\n'
+            msg += '商品名稱' + product[0].pname + '\n'
         updatestate(uid, 0, 0)
         message = TextSendMessage(text='已儲存' + userMessage + '產品')
+
     return message
 
 
@@ -206,6 +238,13 @@ def get_productDB(userid):
     product = Product.objects.filter(uid=userid)
     return product
 
+
+def search_productDB(productname):
+    try:
+        ingred = CosmeticIngredient.objects.get(pname=productname)
+    except:
+        ingred = '查無此產品資訊'
+    return ingred
 
 def Compare_All_Product(userid, qName):
     # 從資料庫取得資料
@@ -228,15 +267,13 @@ def Compare_All_Product(userid, qName):
                 for j in range(len(data)):
                     try:
                         unfitprod = data[j].unfit_prod
-                        unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod)
-
-                        #unfit_Ingre = unfit_Ingre[0].ingredient.spilt(',')
+                        unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod).ingredient.split(',')
                     except:
                         msg += 'unfitprod出錯\n'
-                    #for k in range(len(unfit_Ingre)):
-                     #   if unfit_Ingre[k].find(qIngre[i]) != -1:
-                      #      checkIngre.append(unfit_Ingre[k])
-                       #     break
+                    for k in range(len(unfit_Ingre)):
+                        if unfit_Ingre[k].find(qIngre[i]) != -1:
+                            checkIngre.append(unfit_Ingre[k])
+                            break
             except:
                 msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
                 break
