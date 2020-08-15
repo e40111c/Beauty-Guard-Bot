@@ -155,6 +155,11 @@ def callback(request):
                     pn = Compare_All_Product(uid, prc[1].pname)
                     pn += '分析結束!!!!'
                     message = TextSendMessage(text=pn)
+                    
+                elif event.message.text == '回報':
+                    status = get_statusDB(uid)
+                    message = message_continuous(status.continuous, uid, event.message.text)    
+                    
                 else:
                     try:
                         status = get_statusDB(uid)
