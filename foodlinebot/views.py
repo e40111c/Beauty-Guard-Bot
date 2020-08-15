@@ -214,6 +214,14 @@ def message_continuous(countin, uid, userMessage):
             result = '已找到'+userMessage+'成分\n'+res
         updatestate(uid, 0, 0)
         message = TextSendMessage(text=result)
+        
+    elif countin == 0 and userMessage == '回報':
+        message = TextSendMessage(text='請輸入想要回報的產品/問題')
+        updatestate(uid, 1, 6)
+    elif countin == 6:
+        message = TextSendMessage(text='感謝你的回報，我們會盡速處理')
+        updatestate(uid, 0, 0)
+
     else:
         update_productDB(countin, uid, userMessage)
         product = get_productDB(uid)
