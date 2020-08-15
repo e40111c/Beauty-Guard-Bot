@@ -14,6 +14,13 @@ line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 
+def hello_view(request):
+    return render(request, 'hello_django.html', {
+        'data': "Hello Django"
+    })
+
+
+
 
 
 @csrf_exempt
