@@ -158,7 +158,10 @@ def callback(request):
                 else:
                     try:
                         status = get_statusDB(uid)
-                        message = message_continuous(status.continuous, uid, event.message.text)
+                        if(status.continuous == 0 and status.cnt==0):
+                            message = TextSendMessage(text='請遵照畫面指示，勿隨意輸入')
+                        else:
+                            message = message_continuous(status.continuous, uid, event.message.text)
                     except:
                         pass
                 line_bot_api.reply_message(event.reply_token, message)
