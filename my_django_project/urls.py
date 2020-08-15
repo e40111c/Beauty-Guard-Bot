@@ -17,10 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from foodlinebot import views
+from musics.views import hello_view
+from django.conf.urls import url
  
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('foodlinebot/', include('foodlinebot.urls')) #包含應用程式的網址
+    path('foodlinebot/', include('foodlinebot.urls')), #包含應用程式的網址
+    url(r'^hello/', hello_view),
 ]
 
 
