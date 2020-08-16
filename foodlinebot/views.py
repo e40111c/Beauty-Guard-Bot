@@ -125,7 +125,7 @@ def callback(request):
                     message = TemplateSendMessage(
                         alt_text='查無產品',
                         template=ButtonsTemplate(
-                            thumbnail_image_url='https://5b76fcb485d9.ngrok.io/static/carePic_2.jpg',
+                            thumbnail_image_url='https://c4e69d26b7e1.ngrok.io/static/pic/carePic_2.jpg',
                             title='專科',
                             text='沁涼舒活乳',
                             actions=[
