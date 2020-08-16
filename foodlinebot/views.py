@@ -120,7 +120,7 @@ def callback(request):
                             ]
                         )
                     )
-                elif event.message.text == '4"710596"390756':
+                elif event.message.text == '710596':
                     updatestate(uid, 1, 0)
                     message = TemplateSendMessage(
                         alt_text='查無產品',
