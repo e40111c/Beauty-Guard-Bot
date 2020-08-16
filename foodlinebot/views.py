@@ -290,7 +290,7 @@ def Compare_All_Product(userid, qName):
                     for j in range(len(data)):
                         try:
                             unfitprod = data[j].unfit_prod
-                            unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod).ingredient.split(',')
+                            unfit_Ingre = CosmeticIngredient.objects.get(pname__icontains=unfitprod).ingredient.split(',')
                         except:
                             msg += 'unfitprod出錯\n'
                         for k in range(len(unfit_Ingre)):
@@ -306,7 +306,7 @@ def Compare_All_Product(userid, qName):
                     for j in range(len(data)):
                         try:
                             fitprod = data[j].fit_prod
-                            fit_Ingre = CosmeticIngredient.objects.get(pname=fitprod).ingredient.split(',')
+                            fit_Ingre = CosmeticIngredient.objects.get(pname__icontains=fitprod).ingredient.split(',')
                         except:
                             msg += 'fit出錯'
                         for k in range(len(fit_Ingre)):
