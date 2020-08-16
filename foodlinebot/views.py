@@ -292,11 +292,8 @@ def Compare_All_Product(userid, qName):
             for i in range(len(qIngre)):
                 try:
                     for j in range(len(data)):
-                        try:
-                            unfitprod = data[j].unfit_prod
-                            unfit_Ingre = CosmeticIngredient.objects.get(pname__icontains=unfitprod).ingredient.split(',')
-                        except:
-                            msg += 'unfitprod出錯\n'
+                        unfitprod = data[j].unfit_prod
+                        unfit_Ingre = CosmeticIngredient.objects.get(pname__icontains=unfitprod).ingredient.split(',')
                         for k in range(len(unfit_Ingre)):
                             if unfit_Ingre[k].find(qIngre[i]) != -1:
                                 checkIngre.append(unfit_Ingre[k])
@@ -308,7 +305,6 @@ def Compare_All_Product(userid, qName):
             for i in range(len(checkIngre)):
                 try:
                     for j in range(len(data)):
-                        try:
                             fitprod = data[j].fit_prod
                             fit_Ingre = CosmeticIngredient.objects.get(pname__icontains=fitprod).ingredient.split(',')
                         for k in range(len(fit_Ingre)):
