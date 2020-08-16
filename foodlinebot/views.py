@@ -266,10 +266,10 @@ def message_continuous(countin, uid, userMessage):
                 actions=[
                     MessageTemplateAction(
                         label='確認儲存', text='儲存完成'
-                    )
+                    ),
                     MessageTemplateAction(
                         label='取消儲存', text='儲存完成'
-                    )
+                    ),
                 ]
             )
         )
