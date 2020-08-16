@@ -107,6 +107,7 @@ def callback(request):
 
 
                 elif event.message.text == '掃描QRcode':
+                    
                     message = TemplateSendMessage(
                         alt_text='掃描QRCode Template無法顯示',
                         template=ButtonsTemplate(
@@ -119,13 +120,13 @@ def callback(request):
                             ]
                         )
                     )
-                elif event.message.text == '710596':
+                elif event.message.text == '"710596"':
                     message = TemplateSendMessage(
                         alt_text='查無產品',
                         template=ButtonsTemplate(
-                            thumbnail_image_url='https://5b76fcb485d9.ngrok.io/static/skincare_02.jpg',
-                            title='Fee 法緻',
-                            text='沁涼舒活乳',
+                            thumbnail_image_url='https://5b76fcb485d9.ngrok.io/static/skincare_01.jpg',
+                            title='專科',
+                            text='美白保濕面膜',
                             actions=[
                                 MessageTemplateAction(
                                     label='確認儲存', text='儲存完成'
@@ -139,6 +140,7 @@ def callback(request):
 
 
                 elif event.message.text == '掃描產品條碼':
+                    updatestate(uid, 1, 0)
                     message = TemplateSendMessage(
                         alt_text='掃描產品條碼Template無法顯示',
                         template=ButtonsTemplate(
