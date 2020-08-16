@@ -151,10 +151,8 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析產品':
-                    prc = get_productDB(uid)
-                    pn = Compare_All_Product(uid, prc[1].pname)
-                    pn += '分析結束!!!!'
-                    message = TextSendMessage(text=pn)
+                    status = get_productDB(uid)
+                    message = message_continuous(status.continuous, uid, event.message.text)
                     
                 elif event.message.text == '回報':
                     status = get_statusDB(uid)
@@ -225,6 +223,14 @@ def message_continuous(countin, uid, userMessage):
         updatestate(uid, 1, 6)
     elif countin == 6:
         message = TextSendMessage(text='感謝你的回報，我們會盡速處理')
+        updatestate(uid, 0, 0)
+        
+    elif countin == 0 and userMessage == '分析產品':
+        message = TextSendMessage(text='請輸入想要分析的產品名稱')
+        updatestate(uid, 1, 7)
+    elif countin == 7:
+        msg = Compare_All_Product(uid,userMessage)
+        message = TextSendMessage(text=msg+'\n\n分析結束!!')
         updatestate(uid, 0, 0)
 
     else:
