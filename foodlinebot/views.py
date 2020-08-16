@@ -164,7 +164,7 @@ def callback(request):
                     try:
                         status = get_statusDB(uid)
                         if(status.continuous == 0 and status.cnt==0):
-                            message = TextSendMessage(text='請遵照畫面指示，勿隨意輸入')
+                            message = ''
                         else:
                             message = message_continuous(status.continuous, uid, event.message.text)
                     except:
