@@ -317,7 +317,7 @@ def Compare_All_Product(userid, qName):
                     cnt += 1
                     break
                     
-        if cnt != 2
+        if cnt != 2:
             try:
                 if len(checkIngre) > 0:
                     msg += '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！'
