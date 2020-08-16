@@ -238,16 +238,20 @@ def message_continuous(countin, uid, userMessage):
 
     else:
         update_productDB(countin, uid, userMessage)
-        product = get_productDB(uid)
-        msg = ''
-        if (len(product) > 1):
-            msg += '品牌' + product[len(product) - 1].pbrand + '\n'
-            msg += '商品名稱' + product[len(product) - 1].pname + '\n'
-        else:
-            msg += '品牌' + product[0].pbrand + '\n'
-            msg += '商品名稱' + product[0].pname + '\n'
         updatestate(uid, 0, 0)
-        message = TextSendMessage(text='已儲存' + userMessage + '產品')
+        message = TemplateSendMessage(
+            alt_text='資料庫商品有問題，請另尋產品',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://c4e69d26b7e1.ngrok.io/static/pic/carePic_1.jpg',
+                title=userMessage,
+                text='確認商品',
+                actions=[
+                    MessageTemplateAction(
+                        label='確認儲存', text='儲存完成'
+                    )
+                ]
+            )
+        )
 
     return message
 
@@ -302,7 +306,6 @@ def Compare_All_Product(userid, qName):
                     break
             for i in range(len(checkIngre)):
                 try:
-                    cnt = len(checkIngre)
                     for j in range(len(data)):
                         try:
                             fitprod = data[j].fit_prod
