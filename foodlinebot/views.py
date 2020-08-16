@@ -311,20 +311,20 @@ def Compare_All_Product(userid, qName):
                             msg += 'fit出錯'
                         for k in range(len(fit_Ingre)):
                             if fit_Ingre[k].find(checkIngre[i]) != -1:
-                                cnt -= 1
-                                break
+                            checkIngre.remove(fit_Ingre[k])
+                            break
 
                 except:
                     msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用分析功能喔！'
                     break
 
         try:
-            if cnt == len(checkIngre):
-                msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！\n'
+            if len(checkIngre) > 0:
+                msg += '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！'
             else:
-                msg +=  '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！\n'
+                msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！'
         except:
-            msg += '錯誤發生，請重新點選分析！\n'
+            msg += '錯誤發生，請重新點選分析！'
 
     except:
         msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
