@@ -151,12 +151,15 @@ def callback(request):
                     line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析產品':
-                    status = get_productDB(uid)
-                    message = message_continuous(status.continuous, uid, event.message.text)
-                    
-                elif event.message.text == '回報':
+                    updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
-                    message = message_continuous(status.continuous, uid, event.message.text)    
+                    message = message_continuous(status.continuous, uid, event.message.text)
+
+
+                elif event.message.text == '回報':
+                    updatestate(uid, 1, 0)
+                    status = get_statusDB(uid)
+                    message = message_continuous(status.continuous, uid, event.message.text) 
                     
                 else:
                     try:
@@ -276,54 +279,55 @@ def Compare_All_Product(userid, qName):
         ingred = CosmeticIngredient.objects.get(pname=qName)
         qIngre = ingred.ingredient.split(',')
         msg += '成功找到\n' + qName + '\n'
+
+        checkIngre = []
+        # Start to compare suitable & nonsuitable
+        cnt = 0
+        if len(qIngre) > 0:
+            data = UserProduct.objects.filter(uid=userid)
+            for i in range(len(qIngre)):
+                try:
+                    for j in range(len(data)):
+                        try:
+                            unfitprod = data[j].unfit_prod
+                            unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod).ingredient.split(',')
+                        except:
+                            msg += 'unfitprod出錯\n'
+                        for k in range(len(unfit_Ingre)):
+                            if unfit_Ingre[k].find(qIngre[i]) != -1:
+                                checkIngre.append(unfit_Ingre[k])
+                                break
+                except:
+                    msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
+                    break
+            for i in range(len(checkIngre)):
+                try:
+                    cnt = len(checkIngre)
+                    for j in range(len(data)):
+                        try:
+                            fitprod = data[j].fit_prod
+                            fit_Ingre = CosmeticIngredient.objects.get(pname=fitprod).ingredient.split(',')
+                        except:
+                            msg += 'fit出錯'
+                        for k in range(len(fit_Ingre)):
+                            if fit_Ingre[k].find(checkIngre[i]) != -1:
+                                cnt -= 1
+                                break
+
+                except:
+                    msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用分析功能喔！'
+                    break
+
+        try:
+            if cnt != len(checkIngre):
+                msg += '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！\n'
+            else:
+                msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！\n'
+        except:
+            msg += '錯誤發生，請重新點選分析！\n'
+
     except:
         msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
-
-    checkIngre = []
-    # Start to compare suitable & nonsuitable
-    cnt = 0
-    if len(qIngre) > 0:
-        data = UserProduct.objects.filter(uid=userid)
-        for i in range(len(qIngre)):
-            try:
-                for j in range(len(data)):
-                    try:
-                        unfitprod = data[j].unfit_prod
-                        unfit_Ingre = CosmeticIngredient.objects.get(pname=unfitprod).ingredient.split(',')
-                    except:
-                        msg += 'unfitprod出錯\n'
-                    for k in range(len(unfit_Ingre)):
-                        if unfit_Ingre[k].find(qIngre[i]) != -1:
-                            checkIngre.append(unfit_Ingre[k])
-                            break
-            except:
-                msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
-                break
-        for i in range(len(checkIngre)):
-            try:
-                cnt = len(checkIngre)
-                for j in range(len(data)):
-                    try:
-                        fitprod = data[j].fit_prod
-                        fit_Ingre = CosmeticIngredient.objects.get(pname=fitprod).ingredient.split(',')
-                    except:
-                        msg += 'fit出錯'
-                    for k in range(len(fit_Ingre)):
-                        if fit_Ingre[k].find(checkIngre[i]) != -1:
-                            cnt -= 1
-                            break
-
-            except:
-                msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用分析功能喔！'
-                break
-
-    try:
-        if cnt != len(checkIngre):
-            msg += '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！\n'
-        else:
-            msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！\n'
-    except:
-        msg += '錯誤發生，請重新點選分析！\n'
 
     return msg
 
