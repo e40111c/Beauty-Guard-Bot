@@ -124,15 +124,15 @@ def callback(request):
                         alt_text='查無產品',
                         template=ButtonsTemplate(
                             thumbnail_image_url='https://5b76fcb485d9.ngrok.io/static/skincare_02.jpg',
-                            title='Fees 法緻,
+                            title='Fee 法緻',
                             text='沁涼舒活乳',
                             actions=[
                                 MessageTemplateAction(
                                     label='確認儲存', text='儲存完成'
-                                )
+                                ),
                                 MessageTemplateAction(
                                     label='取消儲存', text='儲存完成'
-                                )
+                                ),
                             ]
                         )
                     )
