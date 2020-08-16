@@ -319,10 +319,10 @@ def Compare_All_Product(userid, qName):
                     break
 
         try:
-            if cnt != len(checkIngre):
-                msg += '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！\n'
-            else:
+            if cnt == len(checkIngre):
                 msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！\n'
+            else:
+                msg +=  '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！\n'
         except:
             msg += '錯誤發生，請重新點選分析！\n'
 
