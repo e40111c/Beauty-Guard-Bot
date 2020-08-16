@@ -121,6 +121,7 @@ def callback(request):
                         )
                     )
                 elif event.message.text == '4"710596"390756':
+                    updatestate(uid, 1, 0)
                     message = TemplateSendMessage(
                         alt_text='查無產品',
                         template=ButtonsTemplate(
@@ -218,6 +219,27 @@ def message_continuous(countin, uid, userMessage):
         update_productDB(countin, uid, userMessage)
         updatestate(uid, 1, 2)
         message = TextSendMessage(text='請輸入你想要紀錄的商品名稱')
+        
+    elif countin == 2:
+        update_productDB(countin, uid, userMessage)
+        updatestate(uid, 0, 0)
+        message = TemplateSendMessage(
+            alt_text='資料庫商品有問題，請另尋產品',
+            template=ButtonsTemplate(
+                thumbnail_image_url='https://c4e69d26b7e1.ngrok.io/static/pic/carePic_1.jpg',
+                title=userMessage,
+                text='確認商品',
+                actions=[
+                    MessageTemplateAction(
+                        label='確認儲存', text='儲存完成'
+                    ),
+                    MessageTemplateAction(
+                        label='取消儲存', text='儲存完成'
+                    ),
+                ]
+            )
+        )    
+    
 
     elif countin == 0 and userMessage == '搜尋產品':
         updatestate(uid, 1, 4)
@@ -255,26 +277,10 @@ def message_continuous(countin, uid, userMessage):
         msg = Compare_All_Product(uid,userMessage)
         message = TextSendMessage(text=msg+'\n\n分析結束!!')
         updatestate(uid, 0, 0)
-
     else:
-        update_productDB(countin, uid, userMessage)
         updatestate(uid, 0, 0)
-        message = TemplateSendMessage(
-            alt_text='資料庫商品有問題，請另尋產品',
-            template=ButtonsTemplate(
-                thumbnail_image_url='https://c4e69d26b7e1.ngrok.io/static/pic/carePic_1.jpg',
-                title=userMessage,
-                text='確認商品',
-                actions=[
-                    MessageTemplateAction(
-                        label='確認儲存', text='儲存完成'
-                    ),
-                    MessageTemplateAction(
-                        label='取消儲存', text='儲存完成'
-                    ),
-                ]
-            )
-        )
+        message = TextSendMessage(text=msg+'請正確重新使用功能\n')
+    
 
     return message
 
