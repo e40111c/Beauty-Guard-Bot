@@ -294,10 +294,10 @@ def Compare_All_Product(userid, qName):
                     for j in range(len(data)):
                         unfitprod = data[j].unfit_prod
                         unfit_Ingre = CosmeticIngredient.objects.get(pname__icontains=unfitprod).ingredient.split(',')
-                        for k in range(len(unfit_Ingre)):
-                            if unfit_Ingre[k].find(qIngre[i]) != -1:
-                                checkIngre.append(unfit_Ingre[k])
-                                break
+                    for k in range(len(unfit_Ingre)):
+                        if unfit_Ingre[k].find(qIngre[i]) != -1:
+                           checkIngre.append(unfit_Ingre[k])
+                           break
                 except:
                     msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
                     cnt += 1
@@ -305,12 +305,12 @@ def Compare_All_Product(userid, qName):
             for i in range(len(checkIngre)):
                 try:
                     for j in range(len(data)):
-                            fitprod = data[j].fit_prod
-                            fit_Ingre = CosmeticIngredient.objects.get(pname__icontains=fitprod).ingredient.split(',')
-                        for k in range(len(fit_Ingre)):
-                            if fit_Ingre[k].find(checkIngre[i]) != -1:
-                                checkIngre.remove(fit_Ingre[k])
-                                break
+                          fitprod = data[j].fit_prod
+                          fit_Ingre = CosmeticIngredient.objects.get(pname__icontains=fitprod).ingredient.split(',')
+                    for k in range(len(fit_Ingre)):
+                       if fit_Ingre[k].find(checkIngre[i]) != -1:
+                          checkIngre.remove(fit_Ingre[k])
+                          break
 
                 except:
                     msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用分析功能喔！\n'
