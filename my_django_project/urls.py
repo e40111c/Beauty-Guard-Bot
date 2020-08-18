@@ -26,6 +26,24 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('foodlinebot/', include('foodlinebot.urls')), #包含應用程式的網址
     url(r'^hello/', hello_view,name='hello_view'),
+    
+    url(r'^suit',SuitProduct,name='SuitProduct'),
+    url(r'^scos',SuitCos,name='SuitCos'),
+    url(r'^sfou',SuitFou,name='SuitFou'),
+    url(r'^sskin',SuitSkin,name='SuitSkin'),
+
+    url(r'^nsuit',NonSuitProduct,name='NonSuitProduct'),
+    url(r'^ncos',NonSuitCos,name='NonSuitCos'),
+    url(r'^nfou',NonSuitFou,name='NonSuitFou'),
+    url(r'^nskin',NonSuitSkin,name='NonSuitSkin'),
+
+    url(r'^waitpro',WaitProduct,name='WaitProduct'),
+    url(r'^wskin',WaitProductCare,name='WaitProductCare'),
+    url(r'^wcos',WaitProductCos,name='WaitProductCos'),
+    url(r'^wfou',WaitProductFou,name='WaitProductFou'),
+    
+    
+    
 ]
 
 
