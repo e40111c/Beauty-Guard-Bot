@@ -19,28 +19,28 @@ def hello_view(request):
     })
 
 def SuitProduct(request):
-    return render(request, 'suit/Suit_Product.html')
+    return render(request, 'Suit_Product.html')
 
 def SuitCos(request):
-    return render(request, 'suit/Suit_Cosmetics.html')
+    return render(request, 'Suit_Cosmetics.html')
 
 def SuitFou(request):
-    return render(request, 'suit/Suit_Foundation.html')
+    return render(request, 'Suit_Foundation.html')
 
 def SuitSkin(request):
-    return render(request, 'suit/Suit_SkinCare.html')
+    return render(request, 'Suit_SkinCare.html')
 
 def NonSuitProduct(request):
-    return render(request, 'nonsuit/nonSuit_Product.html')
+    return render(request, 'nonSuit_Product.html')
 
 def NonSuitCos(request):
-    return render(request, 'nonsuit/nonSuit_Cosmetics.html')
+    return render(request, 'nonSuit_Cosmetics.html')
 
 def NonSuitSkin(request):
-    return render(request, 'nonsuit/nonSuit_SkinCare.html')
+    return render(request, 'nonSuit_SkinCare.html')
 
 def NonSuitFou(request):
-    return render(request, 'nonsuit/nonSuit_Foundation.html')
+    return render(request, 'nonSuit_Foundation.html')
 
 def WaitProduct(request):
     return render(request,'wait_Product.html')
