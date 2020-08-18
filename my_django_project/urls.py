@@ -25,7 +25,7 @@ from django.views.static import serve
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('foodlinebot/', include('foodlinebot.urls')), #包含應用程式的網址
-    url(r'^hello/', hello_view),
+    url(r'^hello/', hello_view,name='hello_view'),
 ]
 
 
