@@ -14,9 +14,47 @@ line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
 def hello_view(request):
-    return render(request, 'hello_django.html', {
-        'data': "Hello Django"
+    return render(request, 'Homepage.html', {
+        'id' : UserProduct.objects.get()
     })
+
+def SuitProduct(request):
+    return render(request, 'suit/Suit_Product.html')
+
+def SuitCos(request):
+    return render(request, 'suit/Suit_Cosmetics.html')
+
+def SuitFou(request):
+    return render(request, 'suit/Suit_Foundation.html')
+
+def SuitSkin(request):
+    return render(request, 'suit/Suit_SkinCare.html')
+
+def NonSuitProduct(request):
+    return render(request, 'nonsuit/nonSuit_Product.html')
+
+def NonSuitCos(request):
+    return render(request, 'nonsuit/nonSuit_Cosmetics.html')
+
+def NonSuitSkin(request):
+    return render(request, 'nonsuit/nonSuit_SkinCare.html')
+
+def NonSuitFou(request):
+    return render(request, 'nonsuit/nonSuit_Foundation.html')
+
+def WaitProduct(request):
+    return render(request,'wait_Product.html')
+
+def WaitProductCos(request):
+    return render(request,'wait_Cosmetics.html')
+
+def WaitProductFou(request):
+    return render(request,'wait_Foundation.html')
+
+def WaitProductCare(request):
+    return render(request,'wait_SkinCare.html')
+
+
 
 
 
