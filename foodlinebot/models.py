@@ -56,5 +56,14 @@ class CosmeticIngredient(models.Model):
     score = models.TextField()
 
     class Meta:
-        db_table = 'Cosmetic_Ingredient'      
+        db_table = 'Cosmetic_Ingredient'    
+        
+class Picture(models.Model):
+    skincare = models.TextField()
+    foundation = models.TextField()
+    cosmetic = models.TextField()
+    
+
+    class Meta:
+        db_table = "Cosemetic_Picture"
         
