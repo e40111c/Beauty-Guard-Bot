@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 
 class CosmeticProduct(models.Model):
-    kind = models.TextField()
-    product = models.TextField()
-    brand = models.TextField()
-    pname = models.TextField()
-    price = models.IntegerField()
-    suitable = models.TextField()
-    picurl = models.TextField()
+    kind = models.TextField(default=None, blank=True, null=True)
+    product = models.TextField(default=None, blank=True, null=True)
+    brand = models.TextField(default=None, blank=True, null=True)
+    pname = models.TextField(default=None, blank=True, null=True)
+    price = models.IntegerField(default=None, blank=True, null=True)
+    suitable = models.TextField(default=None, blank=True, null=True)
+    picurl = models.TextField(default=None, blank=True, null=True)
 
     class Meta:
         db_table = 'Cosmetic_Product'
@@ -17,19 +17,18 @@ class CosmeticProduct(models.Model):
 
 
 class CustomerState(models.Model):
-    uid = models.TextField()
-    cnt = models.IntegerField()
-    continuous = models.IntegerField()
-    created = models.DateTimeField(auto_now_add=True)
+    uid = models.TextField(default=None, blank=True, null=True)
+    cnt = models.IntegerField(default=None, blank=True, null=True)
+    continuous = models.IntegerField(default=None, blank=True, null=True)
 
     class Meta:
         db_table = "Customer_State"
 
 class Product(models.Model):
-    uid = models.TextField()
-    pname = models.TextField()
-    pbrand = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
+    uid = models.TextField(default=None, blank=True, null=True)
+    pname = models.TextField(default=None, blank=True, null=True)
+    pbrand = models.TextField(default=None, blank=True, null=True)
+
 
     class Meta:
         db_table = "Customer_Product"
@@ -37,34 +36,34 @@ class Product(models.Model):
 
         
 class UserProduct(models.Model):
-    uid = models.TextField()
-    pname = models.TextField()
-    pbrand = models.TextField()
-    fit_prod = models.TextField()  # Field name made lowercase.
-    unfit_prod = models.TextField()  # Field name made lowercase.
+    uid = models.TextField(default=None, blank=True, null=True)
+    pname = models.TextField(default=None, blank=True, null=True)
+    pbrand = models.TextField(default=None, blank=True, null=True)
+    fit_prod = models.TextField(default=None, blank=True, null=True)  # Field name made lowercase.
+    unfit_prod = models.TextField(default=None, blank=True, null=True)  # Field name made lowercase.
     
 
     class Meta:
         db_table = 'User_Product'
 
 class CosmeticIngredient(models.Model):
-    pname = models.TextField()
-    ingredient = models.TextField()
-    acne = models.TextField()
-    pchar = models.TextField()
-    dalton = models.TextField()
-    safeness = models.TextField()
-    stimulation = models.TextField()
-    score = models.TextField()
+    pname = models.TextField(default=None, blank=True, null=True)
+    ingredient = models.TextField(default=None, blank=True, null=True)
+    acne = models.TextField(default=None, blank=True, null=True)
+    pchar = models.TextField(default=None, blank=True, null=True)
+    dalton = models.TextField(default=None, blank=True, null=True)
+    safeness = models.TextField(default=None, blank=True, null=True)
+    stimulation = models.TextField(default=None, blank=True, null=True)
+    score = models.TextField(default=None, blank=True, null=True)
 
     class Meta:
         db_table = 'Cosmetic_Ingredient'    
         
 class Picture(models.Model):
-    uid = models.TextField()
-    skincare = models.TextField()
-    foundation = models.TextField()
-    cosmetic = models.TextField()
+    uid = models.TextField(default=None, blank=True, null=True)
+    skincare = models.TextField(default=None, blank=True, null=True)
+    foundation = models.TextField(default=None, blank=True, null=True)
+    cosmetic = models.TextField(default=None, blank=True, null=True)
     
 
     class Meta:
@@ -72,10 +71,10 @@ class Picture(models.Model):
         
 
 class Temp(models.Model):
-    uid = models.TextField()
-    pname = models.TextField()
-    price = models.IntegerField()
-    brand = models.TextField('ww')
+    uid = models.TextField(default=None, blank=True, null=True)
+    pname = models.TextField(default=None, blank=True, null=True)
+    price = models.IntegerField(default=None, blank=True, null=True)
+    brand = models.TextField(default=None, blank=True, null=True)
 
     class Meta:
         db_table = "Temp_p" 
