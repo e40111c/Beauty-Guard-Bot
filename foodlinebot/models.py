@@ -2,9 +2,19 @@ from django.db import models
 
 # Create your models here.
 
+class CosmeticProduct(models.Model):
+    kind = models.TextField()
+    product = models.TextField()
+    brand = models.TextField()
+    pname = models.TextField()
+    price = models.IntegerField()
+    suitable = models.TextField()
+    picurl = models.TextField()
+
+    class Meta:
+        db_table = 'Cosmetic_Product'
 
 
-# Create your models here.
 
 class CustomerState(models.Model):
     uid = models.TextField()
