@@ -26,10 +26,12 @@ class Product(models.Model):
         
 class CosmeticProduct(models.Model):
     kind = models.TextField()
+    product = models.TextField()
     brand = models.TextField()
     pname = models.TextField()
-    char = models.TextField()
+    picurl = models.TextField('ww')
     price = models.IntegerField()
+    suitable = models.TextField('ww')
 
     class Meta:
         db_table = 'Cosmetic_Product'
@@ -40,7 +42,7 @@ class UserProduct(models.Model):
     pbrand = models.TextField()
     fit_prod = models.TextField()  # Field name made lowercase.
     unfit_prod = models.TextField()  # Field name made lowercase.
-    reg_date = models.DateTimeField()
+    
 
     class Meta:
         db_table = 'User_Product'
@@ -59,6 +61,7 @@ class CosmeticIngredient(models.Model):
         db_table = 'Cosmetic_Ingredient'    
         
 class Picture(models.Model):
+    uid = models.TextField()
     skincare = models.TextField()
     foundation = models.TextField()
     cosmetic = models.TextField()
@@ -67,3 +70,13 @@ class Picture(models.Model):
     class Meta:
         db_table = "Cosemetic_Picture"
         
+
+class Temp(models.Model):
+    uid = models.TextField()
+    pname = models.TextField()
+    price = models.IntegerField()
+    brand = models.TextField('ww')
+
+    class Meta:
+        db_table = "Temp_p" 
+
