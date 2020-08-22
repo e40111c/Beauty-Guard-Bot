@@ -24,17 +24,7 @@ class Product(models.Model):
     class Meta:
         db_table = "Customer_Product"
         
-class CosmeticProduct(models.Model):
-    kind = models.TextField()
-    product = models.TextField()
-    brand = models.TextField()
-    pname = models.TextField()
-    picurl = models.TextField('ww')
-    price = models.IntegerField()
-    suitable = models.TextField('ww')
 
-    class Meta:
-        db_table = 'Cosmetic_Product'
         
 class UserProduct(models.Model):
     uid = models.TextField()
