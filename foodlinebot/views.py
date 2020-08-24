@@ -225,70 +225,69 @@ def callback(request):
 
                     line_bot_api.reply_message(event.reply_token, message)
                 elif event.message.text == '掃描QRcode':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous,uid,event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)    
                 
                 elif event.message.text == '掃描產品條碼':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous,uid,event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                     
                 elif event.message.text == '紀錄產品':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                 
                 elif event.message.text == '美妝新聞':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                 
                 elif event.message.text == '推薦':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)    
                 
                 elif event.message.text == '查看已記錄商品':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                                 
                 elif event.message.text == '搜尋產品':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析產品':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                 
                 elif event.message.text == '回報':
-
+                    Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text) 
                     line_bot_api.reply_message(event.reply_token, message)
                     
                 else:
-
                     try:
                         status = get_statusDB(uid)
                     except:
@@ -351,48 +350,51 @@ def message_continuous(countin, uid, userMessage):
         updatestate(uid, 1, 21)
         
     elif countin == 21:
+        prod = []
         try:
             userpro = CosmeticProduct.objects.filter(brand__icontains=userMessage)
             for i in range(len(userpro)):
                 if len(userpro[i].pname)>10:
-                    CosmeticProduct.objects.filter(pname=userpro[i].pname).update(pname=userpro[i].pname[0:10])
+                    pass
+                else:
+                    prod.append(userpro[i])
 
             message = []
             message.append(TextSendMessage(text='請選擇想要儲存的產品'))
-            if len(userpro) == 1:
+            if len(prod) == 1:
                 it = TemplateSendMessage(
                     alt_text='圖片失效or資料庫未有資料',
                     template=ImageCarouselTemplate(
                         columns=[
                             ImageCarouselColumn(
-                                image_url=userpro[0].picurl,
+                                image_url=prod[0].picurl,
                                 action=PostbackTemplateAction(
-                                    label=userpro[0].pname[0:10],
-                                    text=userpro[0].pname[0:10],
+                                    label=prod[0].pname,
+                                    text=prod[0].pname,
                                     data='action=buy&itemid=1'
                                 )
                             )
                         ]
                     )
                 )
-            elif len(userpro) == 2:
+            elif len(prod) == 2:
                 it = TemplateSendMessage(
                     alt_text='圖片失效or資料庫未有資料',
                     template=ImageCarouselTemplate(
                         columns=[
                             ImageCarouselColumn(
-                                image_url=userpro[0].picurl,
+                                image_url=prod[0].picurl,
                                 action=PostbackTemplateAction(
-                                    label=userpro[0].pname[0:10],
-                                    text=userpro[0].pname[0:10],
+                                    label=prod[0].pname,
+                                    text=prod[0].pname,
                                     data='action=buy&itemid=1'
                                 )
                             ),
                             ImageCarouselColumn(
-                                image_url=userpro[1].picurl,
+                                image_url=prod[1].picurl,
                                 action=PostbackTemplateAction(
-                                    label=userpro[1].pname[0:10],
-                                    text=userpro[1].pname[0:10],
+                                    label=prod[1].pname,
+                                    text=prod[1].pname,
                                     data='action=buy&itemid=1'
                                 )
                             )
@@ -405,26 +407,26 @@ def message_continuous(countin, uid, userMessage):
                     template=ImageCarouselTemplate(
                         columns=[
                             ImageCarouselColumn(
-                                image_url=userpro[0].picurl,
+                                image_url=prod[0].picurl,
                                 action=PostbackTemplateAction(
-                                    label=userpro[0].pname,
-                                    text=userpro[0].pname,
+                                    label=prod[0].pname,
+                                    text=prod[0].pname,
                                     data='action=buy&itemid=1'
                                 )
                             ),
                             ImageCarouselColumn(
-                                image_url=userpro[1].picurl,
+                                image_url=prod[1].picurl,
                                 action=PostbackTemplateAction(
-                                    label=userpro[1].pname,
-                                    text=userpro[1].pname,
+                                    label=prod[1].pname,
+                                    text=prod[1].pname,
                                     data='action=buy&itemid=1'
                                 )
                             ),
                             ImageCarouselColumn(
-                                image_url=userpro[2].picurl,
+                                image_url=prod[2].picurl,
                                 action=PostbackTemplateAction(
-                                    label=userpro[2].pname,
-                                    text=userpro[2].pname,
+                                    label=prod[2].pname,
+                                    text=prod[2].pname,
                                     data='action=buy&itemid=1'
                                 )
                             )
