@@ -447,11 +447,8 @@ def message_continuous(countin, uid, userMessage):
                 ingred = CosmeticIngredient.objects.get(id=pnamepic.id-2000)
             else:
                 ingred = CosmeticIngredient.objects.get(id=pnamepic.id)
-            ingred = CosmeticIngredient.objects.filter(pname__icontains=userMessage)
             fit = Temp.objects.get(uid=uid).product
-            
-            if len(ingred)>0:
-                if fit == '適合產品':
+            if fit == '適合產品':
                     User_Product.objects.create(
                         suitable='適合',
                         uid=uid,
@@ -466,7 +463,7 @@ def message_continuous(countin, uid, userMessage):
                         stimulation=ingred.stimulation,
                         type=pnamepic.type
                     )
-                if fit == '不適合產品':
+            elif fit == '不適合產品':
                     User_Product.objects.create(
                         suitable='不適合',
                         uid=uid,
@@ -481,7 +478,7 @@ def message_continuous(countin, uid, userMessage):
                         stimulation=ingred.stimulation,
                         type=pnamepic.type
                     )
-                else:
+            else:
                     User_Product.objects.create(
                         suitable='未知',
                         uid=uid,
@@ -496,10 +493,8 @@ def message_continuous(countin, uid, userMessage):
                         stimulation=ingred.stimulation,
                         type=pnamepic.type
                     )
-                message.append(TextSendMessage(text='儲存完成!'))
-                message.append(StickerSendMessage(package_id=11537, sticker_id=52002734))
-            else:
-                message.append(TextSendMessage(text='此產品尚未記錄在資料庫，請回報給我們謝謝!'))
+            message.append(TextSendMessage(text='儲存完成!'))
+            message.append(StickerSendMessage(package_id=11537, sticker_id=52002734))        
             Temp.objects.all().delete()
             updatestate(uid, 0, 0)
     
