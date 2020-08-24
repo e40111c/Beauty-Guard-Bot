@@ -120,7 +120,7 @@ def WaitProductFou(request):
                  )
 
 def WaitProductCare(request):
-     id = Temp.objects.all()
+    id = Temp.objects.all()
     prod = User_Product.objects.filter(type='SkinCare',uid=id[0].uid).filter(suitable='未知')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
