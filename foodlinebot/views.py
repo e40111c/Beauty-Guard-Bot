@@ -898,7 +898,7 @@ def qrcode_detail(qrscan):
     appID= 'EINV5202008120691'
     totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
     d = {'key1': 'value1', 'key2': 'value2'}
-   # r = requests.post(totaluri, data=d)
+    r = requests.post(totaluri, data=d)
    # items=r.text.split('"')
     #new_items=[]
     #newest_item=''
