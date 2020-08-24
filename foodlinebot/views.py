@@ -885,6 +885,7 @@ def recommand(uid,userprice):
                         
     return product
 
+import requests 
 def qrcode_detail(qrscan):
     invNum = qrscan[10:20]
     invTerm = int(qrscan[20:25])
