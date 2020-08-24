@@ -687,6 +687,7 @@ def message_continuous(countin, uid, userMessage):
         ).filter(
             suitable=userprofile.userkind
         )
+        Temp.objects.all().delete()
         #temp建立產品名稱 品牌 價格 種類
         for i in range(len(kindpro)):
             Temp.objects.create(
