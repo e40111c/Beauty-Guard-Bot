@@ -648,7 +648,7 @@ def message_continuous(countin, uid, userMessage):
             items=[
                 QuickReplyButton(
                     image_url='https://www.flaticon.com/premium-icon/icons/svg/1196/1196219.svg',
-                    action=MessageAction(label="洗面乳", text="洗面乳")
+                    action=MessageAction(label="洗臉乳", text="洗臉乳")
                     ),
                     QuickReplyButton(
                         image_url='https://cdn0.iconfinder.com/data/icons/beauty-products-3/128/Sunblock-4-512.png',
@@ -683,8 +683,7 @@ def message_continuous(countin, uid, userMessage):
     elif countin == 11:
         userprofile = Temp.objects.get(uid=uid) #油性/乾性取出
         kindpro = CosmeticProduct.objects.filter( #找出油/乾性 以及 種類的產品
-            product=userMessage
-        ).filter(
+            product=userMessage,
             suitable=userprofile.userkind
         )
         #temp建立產品名稱 品牌 價格 種類
