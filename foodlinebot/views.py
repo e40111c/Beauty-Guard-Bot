@@ -894,21 +894,21 @@ def qrcode_detail(qrscan):
     randomNumber = qrscan[27:31]
     sellerID = qrscan[55:63]
     encrypt = qrscan[63:87]
-    UUID= '1654655037'#這邊要用line bot的ID
-    appID= 'EINV5202008120691'
-    totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
-    d = {'key1': 'value1', 'key2': 'value2'}
-    r = requests.post(totaluri, data=d)
-    items=r.text.split('"')
-    new_items=[]
-    newest_item=''
-    cnt=0
-    for i in range(len(items)):
-        if(items[i].find('description')!=-1):new_items.append(items[i+2])
-    for i in new_items:
-        cnt+=1
-        newest_item+=str(cnt)+'.'+i+'\n'
-    return newest_item
+   # UUID= '1654655037'#這邊要用line bot的ID
+    #appID= 'EINV5202008120691'
+    #totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
+   # d = {'key1': 'value1', 'key2': 'value2'}
+   # r = requests.post(totaluri, data=d)
+   # items=r.text.split('"')
+    #new_items=[]
+    #newest_item=''
+    #cnt=0
+    #for i in range(len(items)):
+    #    if(items[i].find('description')!=-1):new_items.append(items[i+2])
+    #for i in new_items:
+     #   cnt+=1
+      #  newest_item+=str(cnt)+'.'+i+'\n'
+    return encrypt
 
 
 
