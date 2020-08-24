@@ -173,7 +173,7 @@ def callback(request):
                                     label='掃描產品條碼', text='掃描產品條碼'
                                 ),
                                 MessageTemplateAction(
-                                    label='查看已記錄', text='查看已記錄'
+                                    label='查看已記錄', text='查看已記錄商品'
                                 )
                             ]
                         )
