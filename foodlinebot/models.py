@@ -17,7 +17,7 @@ class CosmeticProduct(models.Model):
 
 
 class CustomerState(models.Model):
-    uid = models.CharField(default=None, blank=True, null=True,max_length=100)
+    uid = models.CharField(max_length=100)
     cnt = models.IntegerField(default=None, blank=True, null=True)
     continuous = models.IntegerField(default=None, blank=True, null=True)
 
@@ -28,7 +28,7 @@ class CustomerState(models.Model):
 
         
 class User_Product(models.Model):
-    uid = models.CharField()
+    uid = models.CharField(max_length=100)
     wait_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
     unfit_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
     fit_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
