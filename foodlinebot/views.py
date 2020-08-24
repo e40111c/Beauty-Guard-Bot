@@ -850,13 +850,12 @@ def recommand(uid,userprice):
     price2 = []
     usp = int(userprice)
     #inputprice = 5  # 使用者輸入價格
-    """
+    
     for i in range(len(product)):
             pr = product[i].price
             x = (usp - product[i].price) * (usp - product[i].price)
-            print(x)
             price2.append(x)
-    print(price2)
+            
     for i in range(len(price2)):
         for j in range(len(price2)):
                 if price2[i] < price2[j]:
@@ -881,10 +880,7 @@ def recommand(uid,userprice):
                     else:
                         product[i].brand = product[j].brand
                         product[j].brand = temp4
-    print(price2)
-    for i in range(3):
-        print(product[i].pname, product[i].brand, ':', product[i].price)
-    """
+                        
     return product
 
 def qrcode_detail(qrscan):
