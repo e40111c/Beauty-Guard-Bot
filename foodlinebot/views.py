@@ -552,12 +552,11 @@ def message_continuous(countin, uid, userMessage):
         updatestate(uid, 1, 8)
     
     elif countin == 8:
-            item = qrcode_detail(userMessage)
-            message = TemplateSendMessage(
-                alt_text='Confirm template',
-                template=ConfirmTemplate(
-                    text='請確認回覆以下是否為您的發票明細:\n' + item,
-                    actions=[
+       message = TemplateSendMessage(
+          alt_text='Confirm template',
+          template=ConfirmTemplate(
+                 text='請確認回覆以下是否為您的發票明細:\n' + qrcode_detail(userMessage),
+                 actions=[
                         MessageTemplateAction(
                             label='確認',
                             text='儲存商品'
@@ -569,8 +568,8 @@ def message_continuous(countin, uid, userMessage):
                     ]
                 )
             )
-            Temp.objects.create(uid=uid,pname='item')
-            updatestate(uid,0,0)
+       Temp.objects.create(uid=uid,pname='item')
+       updatestate(uid,0,0)
     
     elif countin == 9:
         if userMessage == '儲存商品':
@@ -883,13 +882,12 @@ def recommand(uid,userprice):
 
 import requests 
 def qrcode_detail(qrscan):
-    invNum = qrscan[10:20]
-    invTerm = int(qrscan[20:25])
-    if (invTerm % 2 == 1): invTerm += 1
-    randomNumber = qrscan[27:31]
-    sellerID = qrscan[55:63]
-    encrypt = qrscan[63:87]
-
+    invNum = qrscan[0:10]
+    invTerm= int(qrscan[10:15])
+    if(invTerm%2==1):invTerm+=1
+    randomNumber= qrscan[17:21]
+    sellerID= qrscan[45:53]
+    encrypt= qrscan[53:77]
     UUID= '1654655037'#這邊要用line bot的ID
     appID= 'EINV5202008120691'
     totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
@@ -903,8 +901,7 @@ def qrcode_detail(qrscan):
         if(items[i].find('description')!=-1):new_items.append(items[i+2])
     for i in new_items:
         cnt+=1
-        newest_item+=i
-        break
+        newest_item+=str(cnt)+'.'+i+'\n'
     return newest_item
 
 
