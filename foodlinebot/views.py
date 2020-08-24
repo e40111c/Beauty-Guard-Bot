@@ -446,57 +446,57 @@ def message_continuous(countin, uid, userMessage):
             pnamepic = CosmeticProduct.objects.get(pname=userMessage)
             ingred = CosmeticIngredient.objects.filter(pname__icontains=userMessage)
             fit = Temp.objects.get(uid=uid).product
-
-            if fit == '適合產品':
-                User_Product.objects.create(
-                    suitable='適合',
-                    uid=uid,
-                    fit_prod=userMessage,
-                    picurl=pnamepic.picurl,
-                    ingredient=ingred[0].ingredient,
-                    acne=ingred[0].acne,
-                    pchar=ingred[0].pchar,
-                    dalton=ingred[0].dalton,
-                    safeness=ingred[0].safeness,
-                    score=ingred[0].score,
-                    stimulation=ingred[0].stimulation,
-                    ptype=pnamepic.kind
-                )
-            if fit == '不適合產品':
-                User_Product.objects.create(
-                    suitable='不適合',
-                    uid=uid,
-                    unfit_prod=userMessage,
-                    picurl=pnamepic.picurl,
-                    ingredient=ingred[0].ingredient,
-                    acne=ingred[0].acne,
-                    pchar=ingred[0].pchar,
-                    dalton=ingred[0].dalton,
-                    safeness=ingred[0].safeness,
-                    score=ingred[0].score,
-                    stimulation=ingred[0].stimulation,
-                    ptype=pnamepic.kind
-                )
+            if len(ingred)>0:
+                if fit == '適合產品':
+                    User_Product.objects.create(
+                        suitable='適合',
+                        uid=uid,
+                        fit_prod=userMessage,
+                        picurl=pnamepic.picurl,
+                        ingredient=ingred[0].ingredient,
+                        acne=ingred[0].acne,
+                        pchar=ingred[0].pchar,
+                        dalton=ingred[0].dalton,
+                        safeness=ingred[0].safeness,
+                        score=ingred[0].score,
+                        stimulation=ingred[0].stimulation,
+                        type=pnamepic.type
+                    )
+                if fit == '不適合產品':
+                    User_Product.objects.create(
+                        suitable='不適合',
+                        uid=uid,
+                        unfit_prod=userMessage,
+                        picurl=pnamepic.picurl,
+                        ingredient=ingred[0].ingredient,
+                        acne=ingred[0].acne,
+                        pchar=ingred[0].pchar,
+                        dalton=ingred[0].dalton,
+                        safeness=ingred[0].safeness,
+                        score=ingred[0].score,
+                        stimulation=ingred[0].stimulation,
+                        type=pnamepic.type
+                    )
+                else:
+                    User_Product.objects.create(
+                        suitable='未知',
+                        uid=uid,
+                        wait_prod=userMessage,
+                        picurl=pnamepic.picurl,
+                        ingredient=ingred[0].ingredient,
+                        acne=ingred[0].acne,
+                        pchar=ingred[0].pchar,
+                        dalton=ingred[0].dalton,
+                        safeness=ingred[0].safeness,
+                        score=ingred[0].score,
+                        stimulation=ingred[0].stimulation,
+                        type=pnamepic.type
+                    )
+                message.append(TextSendMessage(text='儲存完成!'))
+                message.append(StickerSendMessage(package_id=11537, sticker_id=52002734))
             else:
-                User_Product.objects.create(
-                    suitable='未知',
-                    uid=uid,
-                    wait_prod=userMessage,
-                    picurl=pnamepic.picurl,
-                    ingredient=ingred[0].ingredient,
-                    acne=ingred[0].acne,
-                    pchar=ingred[0].pchar,
-                    dalton=ingred[0].dalton,
-                    safeness=ingred[0].safeness,
-                    score=ingred[0].score,
-                    stimulation=ingred[0].stimulation,
-                    ptype=pnamepic.kind
-                )
-
+                message.append(TextSendMessage(text='此產品尚未記錄在資料庫，請回報給我們謝謝!'))
             Temp.objects.all().delete()
-            message = []
-            message.append(TextSendMessage(text='儲存完成!'))
-            message.append(StickerSendMessage(package_id=11537, sticker_id=52002734))
             updatestate(uid, 0, 0)
     
     elif countin == 0 and userMessage == '掃描產品條碼':
