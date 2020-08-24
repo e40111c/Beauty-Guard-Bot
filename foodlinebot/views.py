@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.core import serializers
 
-import requests
+import re
 from linebot.models import *
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
@@ -889,16 +889,19 @@ def recommand(uid,userprice):
 
 
 def qrcode_detail(qrscan):
-    invNum = qrscan[10:20]
-    invTerm = int(qrscan[20:25])
-    if (invTerm % 2 == 1): invTerm += 1
-    randomNumber = qrscan[27:31]
-    sellerID = qrscan[55:63]
-    encrypt = qrscan[63:87]
-    UUID= '1654655037'#這邊要用line bot的ID
-    appID= 'EINV5202008120691'
-    totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
-    d = {'key1': 'value1', 'key2': 'value2'}
+    x = str(qrscan)
+    r1 = '[a-zA-Z0-9’!"#$%&\'()*+,-./:;<=>?@，。?★、…【】《》？“”‘’！[\\]^_`{|}~]+'
+    ans = re.sub(r1, '', x).strip()
+    #invNum = qrscan[10:20]
+    #invTerm = int(qrscan[20:25])
+    #if (invTerm % 2 == 1): invTerm += 1
+    #randomNumber = qrscan[27:31]
+    #sellerID = qrscan[55:63]
+    #encrypt = qrscan[63:87]
+    #UUID= '1654655037'#這邊要用line bot的ID
+    #appID= 'EINV5202008120691'
+    #totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
+    #d = {'key1': 'value1', 'key2': 'value2'}
     #r = requests.post(totaluri, data=d)
     #items=r.text.split('"')
     #new_items=[]
@@ -909,7 +912,7 @@ def qrcode_detail(qrscan):
     #for i in new_items:
      #   cnt+=1
       #  newest_item+=str(cnt)+'.'+i+'\n'
-    return encrypt
+    return ans
 
 
 
