@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 
 class CosmeticProduct(models.Model):
-    kind = models.TextField(default=None, blank=True, null=True)
-    product = models.TextField(default=None, blank=True, null=True)
-    brand = models.TextField(default=None, blank=True, null=True)
-    pname = models.TextField(default=None, blank=True, null=True)
+    kind = models.CharField(default=None, blank=True, null=True)
+    product = models.CharField(default=None, blank=True, null=True)
+    brand = models.CharField(default=None, blank=True, null=True)
+    pname = models.CharField(default=None, blank=True, null=True)
     price = models.IntegerField(default=None, blank=True, null=True)
-    suitable = models.TextField(default=None, blank=True, null=True)
-    picurl = models.TextField(default=None, blank=True, null=True)
+    suitable = models.CharField(default=None, blank=True, null=True)
+    picurl = models.CharField(default=None, blank=True, null=True)
 
     class Meta:
         db_table = 'Cosmetic_Product'
@@ -17,7 +17,7 @@ class CosmeticProduct(models.Model):
 
 
 class CustomerState(models.Model):
-    uid = models.TextField(default=None, blank=True, null=True)
+    uid = models.CharField(default=None, blank=True, null=True)
     cnt = models.IntegerField(default=None, blank=True, null=True)
     continuous = models.IntegerField(default=None, blank=True, null=True)
 
@@ -28,10 +28,10 @@ class CustomerState(models.Model):
 
         
 class User_Product(models.Model):
-    uid = models.TextField()
-    wait_prod = models.TextField(default=None, blank=True, null=True)
-    unfit_prod = models.TextField(default=None, blank=True, null=True)
-    fit_prod = models.TextField(default=None, blank=True, null=True)
+    uid = models.CharField()
+    wait_prod = models.CharField(default=None, blank=True, null=True)
+    unfit_prod = models.CharField(default=None, blank=True, null=True)
+    fit_prod = models.CharField(default=None, blank=True, null=True)
     picurl = models.TextField(default=None, blank=True, null=True)
     ingredient = models.TextField(default=None, blank=True, null=True)
     acne = models.TextField(default=None, blank=True, null=True)
@@ -47,7 +47,7 @@ class User_Product(models.Model):
         db_table = "UserProduct"
 
 class CosmeticIngredient(models.Model):
-    pname = models.TextField(default=None, blank=True, null=True)
+    pname = models.CharField(default=None, blank=True, null=True)
     ingredient = models.TextField(default=None, blank=True, null=True)
     acne = models.TextField(default=None, blank=True, null=True)
     pchar = models.TextField(default=None, blank=True, null=True)
@@ -61,7 +61,7 @@ class CosmeticIngredient(models.Model):
     
 
 class Temp(models.Model):
-    uid = models.TextField(default=None, blank=True, null=True)
+    uid = models.CharField(default=None, blank=True, null=True)
     pname = models.TextField(default=None, blank=True, null=True)
     price = models.IntegerField(default=None, blank=True, null=True)
     brand = models.TextField(default=None, blank=True, null=True)
