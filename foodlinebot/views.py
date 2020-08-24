@@ -225,70 +225,70 @@ def callback(request):
 
                     line_bot_api.reply_message(event.reply_token, message)
                 elif event.message.text == '掃描QRcode':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous,uid,event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)    
                 
                 elif event.message.text == '掃描產品條碼':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous,uid,event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                     
                 elif event.message.text == '紀錄產品':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                 
                 elif event.message.text == '美妝新聞':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                 
                 elif event.message.text == '推薦':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)    
                 
                 elif event.message.text == '查看已記錄商品':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                                 
                 elif event.message.text == '搜尋產品':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
 
                 elif event.message.text == '分析產品':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
                 
                 elif event.message.text == '回報':
-                    Temp.objects.all().delete()
+
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
                     message = message_continuous(status.continuous, uid, event.message.text) 
                     line_bot_api.reply_message(event.reply_token, message)
                     
                 else:
-                    Temp.objects.all().delete()
+
                     try:
                         status = get_statusDB(uid)
                     except:
