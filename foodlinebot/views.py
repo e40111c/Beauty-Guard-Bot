@@ -444,9 +444,9 @@ def message_continuous(countin, uid, userMessage):
     elif countin == 22:
             pnamepic = CosmeticProduct.objects.get(pname=userMessage)
             if pnamepic.id > 2400:
-                ingred = CosmeticIngredient.objects.get(id=pname.id-2000)
+                ingred = CosmeticIngredient.objects.get(id=pnamepic.id-2000)
             else:
-                ingred = CosmeticIngredient.objects.get(id=pname.id)
+                ingred = CosmeticIngredient.objects.get(id=pnamepic.id)
             ingred = CosmeticIngredient.objects.filter(pname__icontains=userMessage)
             fit = Temp.objects.get(uid=uid).product
             
