@@ -719,23 +719,23 @@ def message_continuous(countin, uid, userMessage):
             quick_reply=QuickReply(
                 items=[
                     QuickReplyButton(
-                        image_url='https://image.flaticon.com/icons/svg/594/594105.svg',
+                        image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/6931268111571662152-512.png',
                         action=MessageAction(label="圖片顯示錯誤", text="圖片顯示錯誤")
                     ),
                     QuickReplyButton(
-                        image_url='https://image.flaticon.com/icons/svg/1150/1150626.svg',
+                        image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/14393104921553233145-512.png',
                         action=MessageAction(label="網址位址錯誤", text="網址位址錯誤")
                     ),
                    QuickReplyButton(
-                        image_url='https://image.flaticon.com/icons/svg/1076/1076337.svg',
+                        image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/5994997231555590637-512.png',
                         action=MessageAction(label="產品資訊錯誤", text="產品資訊錯誤")
                     ),
                     QuickReplyButton(
-                        image_url='https://image.flaticon.com/icons/svg/752/752755.svg',
+                        image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/5537241051579156644-512.png',
                         action=MessageAction(label="查無品項或成分", text="查無品項或成分")
                     ),
                     QuickReplyButton(
-                        image_url="https://image.flaticon.com/icons/svg/617/617752.svg",
+                        image_url="https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/833566731594444098-512.png",
                         action=MessageAction(label="其他", text="其他")
                     ),
                 ]
