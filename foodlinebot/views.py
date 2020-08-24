@@ -569,7 +569,7 @@ def message_continuous(countin, uid, userMessage):
                 ]
             )
         )
-       Temp.objects.create(uid=uid,pname=str(item))
+       Temp.objects.create(uid=uid,pname='itme')
        updatestate(uid,0,0)
     
     elif countin == 9:
