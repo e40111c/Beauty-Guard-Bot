@@ -62,12 +62,12 @@ class CosmeticIngredient(models.Model):
 
 class Temp(models.Model):
     uid = models.CharField(default=None, blank=True, null=True)
-    pname = models.TextField(default=None, blank=True, null=True)
+    pname = models.CharField(default=None, blank=True, null=True)
     price = models.IntegerField(default=None, blank=True, null=True)
-    brand = models.TextField(default=None, blank=True, null=True)
-    product = models.TextField(default=None, blank=True, null=True)
-    userproduct = models.TextField(default=None, blank=True, null=True)
-    userkind = models.TextField(default=None, blank=True, null=True)
+    brand = models.CharField(default=None, blank=True, null=True)
+    product = models.CharField(default=None, blank=True, null=True)
+    userproduct = models.CharField(default=None, blank=True, null=True)
+    userkind = models.CharField(default=None, blank=True, null=True)
 
 
     class Meta:
