@@ -570,7 +570,7 @@ def message_continuous(countin, uid, userMessage):
                 )
             )
             Temp.objects.create(uid=uid,pname='item')
-        updatestate(uid,0,0)
+            updatestate(uid,0,0)
     
     elif countin == 9:
         if userMessage == '儲存商品':
