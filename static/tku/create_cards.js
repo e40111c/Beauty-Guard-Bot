@@ -64,7 +64,7 @@ for(var i = 0; i < products.length; i++) {
         for(var j = 0; j < ingre.length; j++){
             //need loop for ingredient start from here
             html_card += "<tbody class = \"table_row\"><tr>";
-            html_card += "<th scope=\"row\">"+ingre[j][1:]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j][:len(saf[j])-1]+"</td></tr>";
+            html_card += "<th scope=\"row\">"+ingre[j]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j]+"</td></tr>";
             //end loop
         }
         html_card += "</tbody></table></div></div>";
