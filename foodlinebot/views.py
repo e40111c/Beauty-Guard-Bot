@@ -888,12 +888,12 @@ def recommand(uid,userprice):
 
 import requests 
 def qrcode_detail(qrscan):
-    invNum = qrscan[0:10]
-    invTerm= int(qrscan[10:15])
-    if(invTerm%2==1):invTerm+=1
-    randomNumber= qrscan[17:21]
-    sellerID= qrscan[45:53]
-    encrypt= qrscan[53:77]
+    invNum = qrscan[10:20]
+    invTerm = int(qrscan[20:25])
+    if (invTerm % 2 == 1): invTerm += 1
+    randomNumber = qrscan[27:31]
+    sellerID = qrscan[55:63]
+    encrypt = qrscan[63:87]
     UUID= '1654655037'#這邊要用line bot的ID
     appID= 'EINV5202008120691'
     totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
