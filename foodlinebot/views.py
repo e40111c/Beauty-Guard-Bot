@@ -700,15 +700,18 @@ def message_continuous(countin, uid, userMessage):
     
     
     elif countin == 12:
-        result = recommand(uid, userMessage)
         message = []
-        message.append(TextSendMessage(text='以下是我們根據系統分析後推薦給你的商品'))
-        msg = ''
-        for i in range(3):
-            msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
-        message.append(TextSendMessage(text=msg))
-        message.append(StickerSendMessage(package_id=1, sticker_id=13))
-        Temp.objects.all().delete()
+        try:
+            result = recommand(uid, userMessage)
+            message.append(TextSendMessage(text='以下是我們根據系統分析後推薦給你的商品'))
+            msg = ''
+            for i in range(3):
+                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
+            message.append(TextSendMessage(text=msg))
+            message.append(StickerSendMessage(package_id=1, sticker_id=13))
+            Temp.objects.all().delete()
+        except:
+            message.append(TextSendMessage(text='沒有可推薦的商品，抱歉!'))
         updatestate(uid, 0, 0)
     
     
