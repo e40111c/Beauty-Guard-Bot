@@ -453,17 +453,7 @@ def message_continuous(countin, uid, userMessage):
             if fit == '適合產品':
                     User_Product.objects.create(
                         suitable='適合',
-                        uid=uid,
-                        fit_prod=userMessage,
-                        picurl=pnamepic.picurl,
-                        ingredient=ingred.ingredient,
-                        acne=ingred.acne,
-                        pchar=ingred.pchar,
-                        dalton=ingred.dalton,
-                        safeness=ingred.safeness,
-                        score=ingred.score,
-                        stimulation=ingred.stimulation,
-                        ptype=pnamepic.kind
+                        uid=uid
                     )
             elif fit == '不適合產品':
                     User_Product.objects.create(
