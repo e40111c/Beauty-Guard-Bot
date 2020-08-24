@@ -165,8 +165,8 @@ def callback(request):
                                 MessageTemplateAction(
                                     label='手動輸入', text='紀錄產品'
                                 ),
-                                URITemplateAction(  # 這行要改
-                                    label='掃描QRcode(限Android)', uri='https://liff.line.me/1654432888-3nAgx1WL'  # 這行要改
+                                MessageTemplateAction(
+                                    label='掃描QRcode(限Android)', text='掃描QRcode'
                                 ),
                                 MessageTemplateAction(
                                     label='掃描產品條碼', text='掃描產品條碼'
@@ -188,14 +188,7 @@ def callback(request):
                             text='僅搜尋產品成分',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='搜尋產品'
-                                ),
-                                URITemplateAction(  # 這行要改
-                                    label='掃描QRcode(限Android)', uri='https://liff.line.me/1654432888-3nAgx1WL'  # 這行要改
-                                ),
-                                MessageTemplateAction(
-                                    label='掃描產品條碼', text='掃描產品條碼'
-                                )
+                                    label='搜尋產品', text='搜尋產品'
                             ]
                         )
                     )
@@ -211,14 +204,7 @@ def callback(request):
                             text='分析與已紀錄之產品成分是否適合',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='分析產品'
-                                ),
-                                URITemplateAction(  # 這行要改
-                                    label='掃描QRcode(限Android)', uri='https://liff.line.me/1654432888-3nAgx1WL'  # 這行要改
-                                ),
-                                MessageTemplateAction(
-                                    label='掃描產品條碼', text='掃描產品條碼'
-                                )
+                                    label='分析產品', text='分析產品'
                             ]
                         )
                     )
