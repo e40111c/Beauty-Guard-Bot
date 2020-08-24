@@ -119,6 +119,9 @@
 
     <!-- Owl Setting start-->
     <script src = "{% static 'tku/jquery.min.js' %}" type = "text/javascript"></script>
+        <script>
+                var products = JSON.parse(`{{ product|escapejs  }}`);
+        </script>
     <script src = "{% static 'tku/owl.carousel.js' %}" type = "text/javascript"></script>
     <script type = "text/javascript">
         $('.owl-carousel').owlCarousel({
