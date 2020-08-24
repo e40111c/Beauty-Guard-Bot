@@ -794,7 +794,7 @@ def Compare_All_Product(userid, qName):
         # Start to compare suitable & nonsuitable
         cnt = 0
         if len(qIngre) > 0:
-            data = UserProduct.objects.filter(uid=userid)
+            data = User_Product.objects.filter(uid=userid)
             for i in range(len(qIngre)):
                 try:
                     for j in range(len(data)):
