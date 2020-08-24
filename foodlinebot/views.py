@@ -189,9 +189,10 @@ def callback(request):
                             actions=[
                                 MessageTemplateAction(
                                     label='搜尋產品', text='搜尋產品'
+                                )
                             ]
                         )
-                    )
+                      )
 
                     line_bot_api.reply_message(event.reply_token, message)
                 elif event.message.text == '分析':
@@ -204,7 +205,14 @@ def callback(request):
                             text='分析與已紀錄之產品成分是否適合',
                             actions=[
                                 MessageTemplateAction(
-                                    label='分析產品', text='分析產品'
+                                    label='手動輸入', text='分析產品'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描QRcode', text='掃描QRcode'
+                                ),
+                                MessageTemplateAction(
+                                    label='掃描產品條碼', text='掃描產品條碼'
+                                )
                             ]
                         )
                     )
