@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 from django.core import serializers
 
+import requests
 from linebot.models import *
 from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
@@ -886,7 +887,7 @@ def recommand(uid,userprice):
                         
     return product
 
-import requests 
+
 def qrcode_detail(qrscan):
     invNum = qrscan[10:20]
     invTerm = int(qrscan[20:25])
@@ -898,8 +899,8 @@ def qrcode_detail(qrscan):
     appID= 'EINV5202008120691'
     totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
     d = {'key1': 'value1', 'key2': 'value2'}
-    r = requests.post(totaluri, data=d)
-   # items=r.text.split('"')
+    #r = requests.post(totaluri, data=d)
+    #items=r.text.split('"')
     #new_items=[]
     #newest_item=''
     #cnt=0
