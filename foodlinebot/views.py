@@ -553,11 +553,11 @@ def message_continuous(countin, uid, userMessage):
     
     elif countin == 8:
        item = str(qrcode_detail(userMessage))
-       message = TemplateSendMessage(
-          alt_text='Confirm template',
-          template=ConfirmTemplate(
-              text='請確認回覆以下是否為您的發票明細:\n' + item,
-              actions=[
+        message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='請確認回覆以下是否為您的發票明細:\n' + item,
+                actions=[
                     MessageTemplateAction(
                         label='確認',
                         text='儲存商品'
@@ -569,7 +569,7 @@ def message_continuous(countin, uid, userMessage):
                 ]
             )
         )
-        Temp.objects.create(uid=uid,pname='item')
+        Temp.objects.create(uid=uid,pname=str(item))
         updatestate(uid,0,0)
     
     elif countin == 9:
