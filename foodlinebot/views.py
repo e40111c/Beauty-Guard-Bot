@@ -890,7 +890,7 @@ def qrcode_detail(qrscan):
     sellerID = qrscan[55:63]
     encrypt = qrscan[63:87]
 
-    UUID= '1654655037'#這邊要用line bot的ID
+    UUID= '1654460811'#這邊要用line bot的ID
     appID= 'EINV5202008120691'
     totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
     d = {'key1': 'value1', 'key2': 'value2'}
