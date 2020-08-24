@@ -443,6 +443,12 @@ def message_continuous(countin, uid, userMessage):
     
     elif countin == 22:
             pnamepic = CosmeticProduct.objects.get(pname=userMessage)
+            if pnamepic.id > 2400:
+                de = pnamepic.id-2000
+                ingred = CosmeticIngredient.objects.get(id=de)
+            else:
+                ingred = CosmeticIngredient.objects.get(id=pnamepic.id)
+            
             message = []
             message.append(TextSendMessage(text='儲存完成!'))
             message.append(StickerSendMessage(package_id=11537, sticker_id=52002734))        
