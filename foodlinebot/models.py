@@ -6,7 +6,7 @@ class CosmeticProduct(models.Model):
     kind = models.CharField(default=None, blank=True, null=True,max_length=100)
     product = models.CharField(default=None, blank=True, null=True,max_length=100)
     brand = models.CharField(default=None, blank=True, null=True,max_length=100)
-    pname = models.CharField(default=None, blank=True, null=True,max_length=100)
+    pname = models.TextField(default=None, blank=True, null=True)
     price = models.IntegerField(default=None, blank=True, null=True)
     suitable = models.CharField(default=None, blank=True, null=True,max_length=100)
     picurl = models.CharField(default=None, blank=True, null=True,max_length=100)
@@ -29,9 +29,9 @@ class CustomerState(models.Model):
         
 class User_Product(models.Model):
     uid = models.CharField(max_length=100)
-    wait_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
-    unfit_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
-    fit_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
+    wait_prod = models.TextField(default=None, blank=True, null=True)
+    unfit_prod = models.TextField(default=None, blank=True, null=True)
+    fit_prod = models.TextField(default=None, blank=True, null=True)
     picurl = models.TextField(default=None, blank=True, null=True)
     ingredient = models.TextField(default=None, blank=True, null=True)
     acne = models.TextField(default=None, blank=True, null=True)
@@ -47,7 +47,7 @@ class User_Product(models.Model):
         db_table = "UserProduct"
 
 class CosmeticIngredient(models.Model):
-    pname = models.CharField(default=None, blank=True, null=True,max_length=100)
+    pname = models.TextField(default=None, blank=True, null=True)
     ingredient = models.TextField(default=None, blank=True, null=True)
     acne = models.TextField(default=None, blank=True, null=True)
     pchar = models.TextField(default=None, blank=True, null=True)
@@ -62,7 +62,7 @@ class CosmeticIngredient(models.Model):
 
 class Temp(models.Model):
     uid = models.CharField(default=None, blank=True, null=True,max_length=100)
-    pname = models.CharField(default=None, blank=True, null=True,max_length=100)
+    pname = models.TextField(default=None, blank=True, null=True)
     price = models.IntegerField(default=None, blank=True, null=True)
     brand = models.CharField(default=None, blank=True, null=True,max_length=100)
     product = models.CharField(default=None, blank=True, null=True,max_length=100)
