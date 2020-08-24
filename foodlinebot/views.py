@@ -562,7 +562,7 @@ def message_continuous(countin, uid, userMessage):
        message = TemplateSendMessage(
             alt_text='Confirm template',
             template=ConfirmTemplate(
-                text='請確認回覆以下是否為您的發票明細:\n' + str(cnt),
+                text='請確認回覆以下是否為您的發票明細:\n' + item,
                 actions=[
                     MessageTemplateAction(
                         label='確認',
@@ -899,7 +899,7 @@ def qrcode_detail(qrscan):
     appID= 'EINV5202008120691'
     totaluri=   'https://api.einvoice.nat.gov.tw/PB2CAPIVAN/invapp/InvApp?action=qryInvDetail&version=0.5&type=Barcode&generation=V2&invNum='+invNum+'&invTerm='+str(invTerm)+'&encrypt='+encrypt+'&sellerID='+sellerID+'&UUID='+UUID+'&appID='+appID+'&randomNumber='+randomNumber
     d = {'key1': 'value1', 'key2': 'value2'}
-    r = requests.post(totaluri, data=d)
+    #r = requests.post(totaluri, data=d)
     #items=r.text.split('"')
     #new_items=[]
     #newest_item=''
