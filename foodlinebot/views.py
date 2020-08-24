@@ -443,10 +443,10 @@ def message_continuous(countin, uid, userMessage):
     
     elif countin == 22:
             pnamepic = CosmeticProduct.objects.get(pname=userMessage)
-            if pnamepic.id > 2400:
-                ingred = CosmeticIngredient.objects.get(id=pnamepic.id-2000)
-            else:
-                ingred = CosmeticIngredient.objects.get(id=pnamepic.id)
+            #if pnamepic.id > 2400:
+            #    ingred = CosmeticIngredient.objects.get(id=pnamepic.id-2000)
+            #else:
+            ingred = CosmeticIngredient.objects.get(id=20)
             fit = Temp.objects.get(uid=uid).product
             if fit == '適合產品':
                     User_Product.objects.create(
