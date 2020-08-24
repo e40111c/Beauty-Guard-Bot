@@ -440,6 +440,7 @@ def message_continuous(countin, uid, userMessage):
             updatestate(uid,0,0)
     
     elif countin == 22:
+            word = str(userMessage)
             pnamepic = CosmeticProduct.objects.get(pname=userMessage)
             ingred = CosmeticIngredient.objects.filter(pname__icontains=userMessage)
             fit = Temp.objects.get(uid=uid).product
