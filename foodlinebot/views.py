@@ -571,7 +571,7 @@ def message_continuous(countin, uid, userMessage):
                 )
             )
             Temp.objects.create(uid=uid,pname='item')
-        else:
+        except:
             message = []
             message.append(TextSendMessage(text='Qrcode出錯!'))
         updatestate(uid,0,0)
