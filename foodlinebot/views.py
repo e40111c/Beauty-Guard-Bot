@@ -552,11 +552,16 @@ def message_continuous(countin, uid, userMessage):
         updatestate(uid, 1, 8)
     
     elif countin == 8:
-       item = str(qrcode_detail(userMessage))
+       cnt = 1 
+       try:
+            item = str(qrcode_detail(userMessage))
+            cnt += 1
+       except:
+            pass
        message = TemplateSendMessage(
             alt_text='Confirm template',
             template=ConfirmTemplate(
-                text='請確認回覆以下是否為您的發票明細:\n' + item,
+                text='請確認回覆以下是否為您的發票明細:\n' + str(cnt),
                 actions=[
                     MessageTemplateAction(
                         label='確認',
