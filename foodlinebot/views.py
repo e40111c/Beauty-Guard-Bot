@@ -815,8 +815,8 @@ def Compare_All_Product(userid, qName):
                             fit_Ingre = data[j].ingredient.split(',')
                             for k in range(len(fit_Ingre)):
                                 if fit_Ingre[k].find(checkIngre[i]) != -1:
-                                checkIngre.remove(fit_Ingre[k])
-                                break
+                                    checkIngre.remove(fit_Ingre[k])
+                                    break
 
                 except:
                     msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用比對功能喔！\n'
