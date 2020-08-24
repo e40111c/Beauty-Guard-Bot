@@ -442,7 +442,7 @@ def message_continuous(countin, uid, userMessage):
             updatestate(uid,0,0)
     
     elif countin == 22:
-            pnamepic = CosmeticProduct.objects.get(pname=userMessage)
+            pnamepic = CosmeticProduct.objects.get(id=20)
             #if pnamepic.id > 2400:
             #    ingred = CosmeticIngredient.objects.get(id=pnamepic.id-2000)
             #else:
