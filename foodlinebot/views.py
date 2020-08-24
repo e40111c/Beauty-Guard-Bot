@@ -684,6 +684,8 @@ def message_continuous(countin, uid, userMessage):
         userprofile = Temp.objects.get(uid=uid) #油性/乾性取出
         kindpro = CosmeticProduct.objects.filter( #找出油/乾性 以及 種類的產品
             product=userMessage
+        ).filter(
+            suitable=userprofile.userkind
         )
         #temp建立產品名稱 品牌 價格 種類
         for i in range(len(kindpro)):
