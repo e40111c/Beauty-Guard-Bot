@@ -442,10 +442,14 @@ def message_continuous(countin, uid, userMessage):
             updatestate(uid,0,0)
     
     elif countin == 22:
-            word = str(userMessage)
             pnamepic = CosmeticProduct.objects.get(pname=userMessage)
+            if pnamepic.id > 2400
+                ingred = CosmeticIngredient.objects.get(id=pname.id-2000)
+            else:
+                ingred = CosmeticIngredient.objects.get(id=pname.id)
             ingred = CosmeticIngredient.objects.filter(pname__icontains=userMessage)
             fit = Temp.objects.get(uid=uid).product
+            
             if len(ingred)>0:
                 if fit == '適合產品':
                     User_Product.objects.create(
@@ -453,13 +457,13 @@ def message_continuous(countin, uid, userMessage):
                         uid=uid,
                         fit_prod=userMessage,
                         picurl=pnamepic.picurl,
-                        ingredient=ingred[0].ingredient,
-                        acne=ingred[0].acne,
-                        pchar=ingred[0].pchar,
-                        dalton=ingred[0].dalton,
-                        safeness=ingred[0].safeness,
-                        score=ingred[0].score,
-                        stimulation=ingred[0].stimulation,
+                        ingredient=ingred.ingredient,
+                        acne=ingred.acne,
+                        pchar=ingred.pchar,
+                        dalton=ingred.dalton,
+                        safeness=ingred.safeness,
+                        score=ingred.score,
+                        stimulation=ingred.stimulation,
                         type=pnamepic.type
                     )
                 if fit == '不適合產品':
@@ -468,13 +472,13 @@ def message_continuous(countin, uid, userMessage):
                         uid=uid,
                         unfit_prod=userMessage,
                         picurl=pnamepic.picurl,
-                        ingredient=ingred[0].ingredient,
-                        acne=ingred[0].acne,
-                        pchar=ingred[0].pchar,
-                        dalton=ingred[0].dalton,
-                        safeness=ingred[0].safeness,
-                        score=ingred[0].score,
-                        stimulation=ingred[0].stimulation,
+                        ingredient=ingred.ingredient,
+                        acne=ingred.acne,
+                        pchar=ingred.pchar,
+                        dalton=ingred.dalton,
+                        safeness=ingred.safeness,
+                        score=ingred.score,
+                        stimulation=ingred.stimulation,
                         type=pnamepic.type
                     )
                 else:
@@ -483,13 +487,13 @@ def message_continuous(countin, uid, userMessage):
                         uid=uid,
                         wait_prod=userMessage,
                         picurl=pnamepic.picurl,
-                        ingredient=ingred[0].ingredient,
-                        acne=ingred[0].acne,
-                        pchar=ingred[0].pchar,
-                        dalton=ingred[0].dalton,
-                        safeness=ingred[0].safeness,
-                        score=ingred[0].score,
-                        stimulation=ingred[0].stimulation,
+                        ingredient=ingred.ingredient,
+                        acne=ingred.acne,
+                        pchar=ingred.pchar,
+                        dalton=ingred.dalton,
+                        safeness=ingred.safeness,
+                        score=ingred.score,
+                        stimulation=ingred.stimulation,
                         type=pnamepic.type
                     )
                 message.append(TextSendMessage(text='儲存完成!'))
