@@ -548,6 +548,7 @@ def message_continuous(countin, uid, userMessage):
                 ]
             )
         )
+        
         updatestate(uid, 1, 8)
     
     elif countin == 8:
