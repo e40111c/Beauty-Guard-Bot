@@ -441,51 +441,7 @@ def message_continuous(countin, uid, userMessage):
             message.append(StickerSendMessage(package_id=11537,sticker_id=52002755))
             updatestate(uid,0,0)
     
-    elif countin == 22:
-            
-            pnamepic = CosmeticProduct.objects.get(id=20)
-            #if pnamepic.id > 2400:
-            #    ingred = CosmeticIngredient.objects.get(id=pnamepic.id-2000)
-            #else:
-            ingred = CosmeticIngredient.objects.get(id=20)
-            
-            fit = Temp.objects.get(uid=uid).product
-            if fit == '適合產品':
-                    User_Product.objects.create(
-                        suitable='適合',
-                        uid=uid
-                    )
-            elif fit == '不適合產品':
-                    User_Product.objects.create(
-                        suitable='不適合',
-                        uid=uid,
-                        unfit_prod=userMessage,
-                        picurl=pnamepic.picurl,
-                        ingredient=ingred.ingredient,
-                        acne=ingred.acne,
-                        pchar=ingred.pchar,
-                        dalton=ingred.dalton,
-                        safeness=ingred.safeness,
-                        score=ingred.score,
-                        stimulation=ingred.stimulation,
-                        ptype=pnamepic.kind
-                    )
-            else:
-                 User_Product.objects.create(
-                         suitable='未知',
-                         uid=uid,
-                         wait_prod=userMessage,
-                         picurl=pnamepic.picurl,
-                         ingredient=ingred.ingredient,
-                         acne=ingred.acne,
-                         pchar=ingred.pchar,
-                         dalton=ingred.dalton,
-                         safeness=ingred.safeness,
-                         score=ingred.score,
-                         stimulation=ingred.stimulation,
-                         ptype=pnamepic.kind
-                    )
-                    
+    elif countin == 22:    
             message = []
             message.append(TextSendMessage(text='儲存完成!'))
             message.append(StickerSendMessage(package_id=11537, sticker_id=52002734))        
