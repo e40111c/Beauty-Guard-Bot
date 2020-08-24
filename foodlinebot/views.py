@@ -195,17 +195,17 @@ def callback(request):
                       )
 
                     line_bot_api.reply_message(event.reply_token, message)
-                elif event.message.text == '分析':
+                elif event.message.text == '比對':
                     Temp.objects.all().delete()
                     message = TemplateSendMessage(
-                        alt_text='分析Template無法顯示',
+                        alt_text='比對Template無法顯示',
                         template=ButtonsTemplate(
                             thumbnail_image_url='https://cheeek.me/wp-content/uploads/2018/09/117244283.jpg',
-                            title='分析',
-                            text='分析與已紀錄之產品成分是否適合',
+                            title='比對',
+                            text='比對與已紀錄之產品成分是否適合',
                             actions=[
                                 MessageTemplateAction(
-                                    label='手動輸入', text='分析產品'
+                                    label='手動輸入', text='比對產品'
                                 ),
                                 MessageTemplateAction(
                                     label='掃描QRcode', text='掃描QRcode'
@@ -751,12 +751,12 @@ def message_continuous(countin, uid, userMessage):
 
 
         
-    elif countin == 0 and userMessage == '分析產品':
-        message = TextSendMessage(text='請輸入想要分析的產品名稱')
+    elif countin == 0 and userMessage == '比對產品':
+        message = TextSendMessage(text='請輸入想要比對的產品名稱')
         updatestate(uid, 1, 7)
     elif countin == 7:
         msg = Compare_All_Product(uid,userMessage)
-        message = TextSendMessage(text=msg+'\n\n分析結束!!')
+        message = TextSendMessage(text=msg+'\n\n比對結束!!')
         updatestate(uid, 0, 0)
     else:
         updatestate(uid, 0, 0)
@@ -789,7 +789,6 @@ def Compare_All_Product(userid, qName):
     try:
         ingred = CosmeticIngredient.objects.filter(pname__icontains=qName)
         qIngre = ingred[0].ingredient.split(',')
-        msg += '成功找到\n' + qName + '\n'
 
         checkIngre = []
         # Start to compare suitable & nonsuitable
@@ -800,27 +799,29 @@ def Compare_All_Product(userid, qName):
                 try:
                     for j in range(len(data)):
                         unfitprod = data[j].unfit_prod
-                        unfit_Ingre = CosmeticIngredient.objects.get(pname__icontains=unfitprod).ingredient.split(',')
+                        unfit_Ingre = CosmeticIngredient.objects.filter(pname__icontains=unfitprod)
+                        unfitingre = unfit_Ingre[0].ingredient.split(',')
                     for k in range(len(unfit_Ingre)):
                         if unfit_Ingre[k].find(qIngre[i]) != -1:
                            checkIngre.append(unfit_Ingre[k])
                            break
                 except:
-                    msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用分析功能喔！\n'
+                    msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'
                     cnt += 1
                     break
             for i in range(len(checkIngre)):
                 try:
                     for j in range(len(data)):
                           fitprod = data[j].fit_prod
-                          fit_Ingre = CosmeticIngredient.objects.get(pname__icontains=fitprod).ingredient.split(',')
+                          fit_Ingre = CosmeticIngredient.objects.filter(pname__icontains=fitprod).ingredient
+                          fitingre = fit_Ingre[0].split(',')
                     for k in range(len(fit_Ingre)):
                        if fit_Ingre[k].find(checkIngre[i]) != -1:
                           checkIngre.remove(fit_Ingre[k])
                           break
 
                 except:
-                    msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用分析功能喔！\n'
+                    msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用比對功能喔！\n'
                     cnt += 1
                     break
                     
@@ -831,7 +832,7 @@ def Compare_All_Product(userid, qName):
                 else:
                     msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！'
             except:
-                msg += '錯誤發生，請重新點選分析！'
+                msg += '錯誤發生，請重新點選比對功能！'
         else:
             msg += '查無產品成分'
 
