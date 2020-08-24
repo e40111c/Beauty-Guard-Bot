@@ -3,13 +3,13 @@ from django.db import models
 # Create your models here.
 
 class CosmeticProduct(models.Model):
-    kind = models.CharField(default=None, blank=True, null=True)
-    product = models.CharField(default=None, blank=True, null=True)
-    brand = models.CharField(default=None, blank=True, null=True)
-    pname = models.CharField(default=None, blank=True, null=True)
+    kind = models.CharField(default=None, blank=True, null=True,max_length=100)
+    product = models.CharField(default=None, blank=True, null=True,max_length=100)
+    brand = models.CharField(default=None, blank=True, null=True,max_length=100)
+    pname = models.CharField(default=None, blank=True, null=True,max_length=100)
     price = models.IntegerField(default=None, blank=True, null=True)
-    suitable = models.CharField(default=None, blank=True, null=True)
-    picurl = models.CharField(default=None, blank=True, null=True)
+    suitable = models.CharField(default=None, blank=True, null=True,max_length=100)
+    picurl = models.CharField(default=None, blank=True, null=True,max_length=100)
 
     class Meta:
         db_table = 'Cosmetic_Product'
@@ -17,7 +17,7 @@ class CosmeticProduct(models.Model):
 
 
 class CustomerState(models.Model):
-    uid = models.CharField(default=None, blank=True, null=True)
+    uid = models.CharField(default=None, blank=True, null=True,max_length=100)
     cnt = models.IntegerField(default=None, blank=True, null=True)
     continuous = models.IntegerField(default=None, blank=True, null=True)
 
@@ -29,9 +29,9 @@ class CustomerState(models.Model):
         
 class User_Product(models.Model):
     uid = models.CharField()
-    wait_prod = models.CharField(default=None, blank=True, null=True)
-    unfit_prod = models.CharField(default=None, blank=True, null=True)
-    fit_prod = models.CharField(default=None, blank=True, null=True)
+    wait_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
+    unfit_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
+    fit_prod = models.CharField(default=None, blank=True, null=True,max_length=100)
     picurl = models.TextField(default=None, blank=True, null=True)
     ingredient = models.TextField(default=None, blank=True, null=True)
     acne = models.TextField(default=None, blank=True, null=True)
@@ -47,7 +47,7 @@ class User_Product(models.Model):
         db_table = "UserProduct"
 
 class CosmeticIngredient(models.Model):
-    pname = models.CharField(default=None, blank=True, null=True)
+    pname = models.CharField(default=None, blank=True, null=True,max_length=100)
     ingredient = models.TextField(default=None, blank=True, null=True)
     acne = models.TextField(default=None, blank=True, null=True)
     pchar = models.TextField(default=None, blank=True, null=True)
@@ -61,13 +61,13 @@ class CosmeticIngredient(models.Model):
     
 
 class Temp(models.Model):
-    uid = models.CharField(default=None, blank=True, null=True)
-    pname = models.CharField(default=None, blank=True, null=True)
+    uid = models.CharField(default=None, blank=True, null=True,max_length=100)
+    pname = models.CharField(default=None, blank=True, null=True,max_length=100)
     price = models.IntegerField(default=None, blank=True, null=True)
-    brand = models.CharField(default=None, blank=True, null=True)
-    product = models.CharField(default=None, blank=True, null=True)
-    userproduct = models.CharField(default=None, blank=True, null=True)
-    userkind = models.CharField(default=None, blank=True, null=True)
+    brand = models.CharField(default=None, blank=True, null=True,max_length=100)
+    product = models.CharField(default=None, blank=True, null=True,max_length=100)
+    userproduct = models.CharField(default=None, blank=True, null=True,max_length=100)
+    userkind = models.CharField(default=None, blank=True, null=True,max_length=100)
 
 
     class Meta:
