@@ -787,9 +787,9 @@ def Compare_All_Product(userid, qName):
     msg = ''
     qIngre = []
     try:
-        ingred = CosmeticIngredient.objects.filter(pname__icontains=qName)
-        qIngre = ingred[0].ingredient.split(',')
-
+        ingred = CosmeticIngredient.objects.get(pname__icontains=qName)
+        qIngre = ingred.ingredient.split(',')
+        unfit = []
         checkIngre = []
         # Start to compare suitable & nonsuitable
         cnt = 0
@@ -798,13 +798,12 @@ def Compare_All_Product(userid, qName):
             for i in range(len(qIngre)):
                 try:
                     for j in range(len(data)):
-                        unfitprod = data[j].unfit_prod
-                        unfit_Ingre = CosmeticIngredient.objects.filter(pname__icontains=unfitprod)
-                        unfitingre = unfit_Ingre[0].ingredient.split(',')
-                    for k in range(len(unfit_Ingre)):
-                        if unfit_Ingre[k].find(qIngre[i]) != -1:
-                           checkIngre.append(unfit_Ingre[k])
-                           break
+                        if data[j].suitable == '不適合':
+                           unfit_Ingre = data[j].ingredient.split(',')
+                           for k in range(len(unfit_Ingre)):
+                                if unfit_Ingre[k].find(qIngre[i]) != -1:
+                                    checkIngre.append(unfit_Ingre[k])
+                                    break
                 except:
                     msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'
                     cnt += 1
@@ -812,13 +811,12 @@ def Compare_All_Product(userid, qName):
             for i in range(len(checkIngre)):
                 try:
                     for j in range(len(data)):
-                          fitprod = data[j].fit_prod
-                          fit_Ingre = CosmeticIngredient.objects.filter(pname__icontains=fitprod).ingredient
-                          fitingre = fit_Ingre[0].split(',')
-                    for k in range(len(fit_Ingre)):
-                       if fit_Ingre[k].find(checkIngre[i]) != -1:
-                          checkIngre.remove(fit_Ingre[k])
-                          break
+                          if data[j].suitable == '適合':
+                            fit_Ingre = data[j].ingredient.split(',')
+                            for k in range(len(fit_Ingre)):
+                                if fit_Ingre[k].find(checkIngre[i]) != -1:
+                                checkIngre.remove(fit_Ingre[k])
+                                break
 
                 except:
                     msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用比對功能喔！\n'
