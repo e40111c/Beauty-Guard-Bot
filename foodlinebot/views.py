@@ -448,6 +448,7 @@ def message_continuous(countin, uid, userMessage):
                 ingred = CosmeticIngredient.objects.get(id=de)
             else:
                 ingred = CosmeticIngredient.objects.get(id=pnamepic.id)
+            fit = Temp.objects.get(uid=uid).product
             
             message = []
             message.append(TextSendMessage(text='儲存完成!'))
