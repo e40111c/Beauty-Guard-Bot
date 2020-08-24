@@ -267,7 +267,7 @@ def callback(request):
                     message = message_continuous(status.continuous, uid, event.message.text)
                     line_bot_api.reply_message(event.reply_token, message)
 
-                elif event.message.text == '分析產品':
+                elif event.message.text == '比對產品':
                     Temp.objects.all().delete()
                     updatestate(uid, 1, 0)
                     status = get_statusDB(uid)
