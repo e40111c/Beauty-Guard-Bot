@@ -31,7 +31,7 @@ for(var i = 0; i < products.length; i++) {
         html_card +="<!--Card image-->";
         html_card +="<div class=\"view overlay\" style=\"margin-top: 30%;margin-bottom: 10%;\">";
         html_card +="<img src=\""+img_link+"\" class=\"img-fluid\" alt=\"\">"; //img_link is the value to be changed
-        html_card +="</div><h5 class=\"card-title\" style=\"text-align: center; margin:10px;\">"+products[i].fields.fit_prod+"</h5>"; //suit_prod[i] is the value to be changed
+        html_card +="</div><h5 class=\"card-title\" style=\"text-align: center; margin:10px;\">"+products[i].fields.unfit_prod+"</h5>"; //suit_prod[i] is the value to be changed
         html_card +="<button class=\"btn btn-primary\" id=\"btnflip1\" style=\"display:inline-block;margin-left:35%;margin-top:10px;background-color: black;border-color: transparent;box-shadow: 0px 2px grey;\"\">產品成分</button></a></div></div>";
         
         //Part3: set card content(成分,EWG評分,4個指標)
@@ -64,7 +64,7 @@ for(var i = 0; i < products.length; i++) {
         for(var j = 0; j < ingre.length; j++){
             //need loop for ingredient start from here
             html_card += "<tbody class = \"table_row\"><tr>";
-            html_card += "<th scope=\"row\">"+ingre[j]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j]+"</td></tr>";
+            html_card += "<th scope=\"row\">"+ingre[j][1:]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j][:len(saf[j])-1]+"</td></tr>";
             //end loop
         }
         html_card += "</tbody></table></div></div>";
