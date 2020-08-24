@@ -24,15 +24,7 @@ class CustomerState(models.Model):
     class Meta:
         db_table = "Customer_State"
 
-class Product(models.Model):
-    uid = models.TextField(default=None, blank=True, null=True)
-    pname = models.TextField(default=None, blank=True, null=True)
-    pbrand = models.TextField(default=None, blank=True, null=True)
 
-
-    class Meta:
-        db_table = "Customer_Product"
-        
 
         
 class User_Product(models.Model):
