@@ -783,10 +783,14 @@ def update_productDB(count, uid, userMessage):
 
 def search_productDB(productname):
     try:
-        ingred = CosmeticIngredient.objects.filter(pname__icontains=productname)
+        ingre = CosmeticProduct.objects.filter(pname__icontains=productname)
+        if ingre[0].id > 2000:
+            ingred2 = CosmeticIngredient.objects.get(id=(ingre[0].id-2000))
+        else:
+            ingred2 = CosmeticIngredient.objects.get(id=ingre[0].id)
     except:
         ingred = '查無此產品資訊'
-    return ingred
+    return ingred2
 
 def Compare_All_Product(userid, qName):
     # 從資料庫取得資料
