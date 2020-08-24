@@ -442,12 +442,13 @@ def message_continuous(countin, uid, userMessage):
             updatestate(uid,0,0)
     
     elif countin == 22:
+            message = []
             #pnamepic = CosmeticProduct.objects.get(id=20)
             #if pnamepic.id > 2400:
             #    ingred = CosmeticIngredient.objects.get(id=pnamepic.id-2000)
             #else:
             #ingred = CosmeticIngredient.objects.get(id=20)
-            """
+            
             fit = Temp.objects.get(uid=uid).product
             if fit == '適合產品':
                     User_Product.objects.create(
@@ -494,7 +495,7 @@ def message_continuous(countin, uid, userMessage):
                         stimulation=ingred.stimulation,
                         type=pnamepic.type
                     )
-            """
+            
             message.append(TextSendMessage(text='儲存完成!'))
             message.append(StickerSendMessage(package_id=11537, sticker_id=52002734))        
             Temp.objects.all().delete()
