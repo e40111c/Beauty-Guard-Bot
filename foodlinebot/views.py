@@ -709,9 +709,10 @@ def message_continuous(countin, uid, userMessage):
                 msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
             message.append(TextSendMessage(text=msg))
             message.append(StickerSendMessage(package_id=1, sticker_id=13))
-            Temp.objects.all().delete()
         except:
             message.append(TextSendMessage(text='沒有可推薦的商品，抱歉!'))
+            
+        Temp.objects.all().delete()
         updatestate(uid, 0, 0)
     
     
@@ -848,6 +849,7 @@ def recommand(uid,userprice):
     price2 = []
     usp = int(userprice)
     #inputprice = 5  # 使用者輸入價格
+    """
     for i in range(len(product)):
             pr = product[i].price
             x = (usp - product[i].price) * (usp - product[i].price)
@@ -881,6 +883,7 @@ def recommand(uid,userprice):
     print(price2)
     for i in range(3):
         print(product[i].pname, product[i].brand, ':', product[i].price)
+    """
     return product
 
 def qrcode_detail(qrscan):
