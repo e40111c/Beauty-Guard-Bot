@@ -23,7 +23,7 @@ def SuitProduct(request):
 
 def SuitCos(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='Cosmetic',uid=id[0].uid).filter(suitable='適合')
+    prod = User_Product.objects.filter(ptype='Cosmetic',uid=id[0].uid).filter(suitable='適合')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     
@@ -35,7 +35,7 @@ def SuitCos(request):
 
 def SuitFou(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='Base',uid=id[0].uid).filter(suitable='適合')
+    prod = User_Product.objects.filter(ptype='Base',uid=id[0].uid).filter(suitable='適合')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     
@@ -47,7 +47,7 @@ def SuitFou(request):
 
 def SuitSkin(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='SkinCare',uid=id[0].uid).filter(suitable='適合')
+    prod = User_Product.objects.filter(ptype='SkinCare',uid=id[0].uid).filter(suitable='適合')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     
@@ -62,7 +62,7 @@ def NonSuitProduct(request):
 
 def NonSuitCos(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='Cosmetic',uid=id[0].uid).filter(suitable='不適合')
+    prod = User_Product.objects.filter(ptype='Cosmetic',uid=id[0].uid).filter(suitable='不適合')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     return render(request, 'nonSuit_Cosmetics.html',
@@ -73,7 +73,7 @@ def NonSuitCos(request):
 
 def NonSuitSkin(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='SkinCare',uid=id[0].uid).filter(suitable='不適合')
+    prod = User_Product.objects.filter(ptype='SkinCare',uid=id[0].uid).filter(suitable='不適合')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     return render(request, 'nonSuit_SkinCare.html',
@@ -84,7 +84,7 @@ def NonSuitSkin(request):
 
 def NonSuitFou(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='Base',uid=id[0].uid).filter(suitable='不適合')
+    prod = User_Product.objects.filter(ptype='Base',uid=id[0].uid).filter(suitable='不適合')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     
@@ -99,7 +99,7 @@ def WaitProduct(request):
 
 def WaitProductCos(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='Cosmetic',uid=id[0].uid).filter(suitable='未知')
+    prod = User_Product.objects.filter(ptype='Cosmetic',uid=id[0].uid).filter(suitable='未知')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     
@@ -111,7 +111,7 @@ def WaitProductCos(request):
 
 def WaitProductFou(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='Base',uid=id[0].uid).filter(suitable='未知')
+    prod = User_Product.objects.filter(ptype='Base',uid=id[0].uid).filter(suitable='未知')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     return render(request,'wait_Foundation.html',
@@ -122,7 +122,7 @@ def WaitProductFou(request):
 
 def WaitProductCare(request):
     id = Temp.objects.all()
-    prod = User_Product.objects.filter(type='SkinCare',uid=id[0].uid).filter(suitable='未知')
+    prod = User_Product.objects.filter(ptype='SkinCare',uid=id[0].uid).filter(suitable='未知')
     json_serializer = serializers.get_serializer("json")()
     prods = json_serializer.serialize(prod)
     
