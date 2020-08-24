@@ -552,7 +552,6 @@ def message_continuous(countin, uid, userMessage):
         updatestate(uid, 1, 8)
     
     elif countin == 8:
-        try:
             item = qrcode_detail(userMessage)
             message = TemplateSendMessage(
                 alt_text='Confirm template',
@@ -571,9 +570,6 @@ def message_continuous(countin, uid, userMessage):
                 )
             )
             Temp.objects.create(uid=uid,pname='item')
-        except:
-            message = []
-            message.append(TextSendMessage(text='Qrcode出錯!'))
         updatestate(uid,0,0)
     
     elif countin == 9:
