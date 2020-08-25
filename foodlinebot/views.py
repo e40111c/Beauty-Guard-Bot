@@ -396,7 +396,7 @@ def message_continuous(countin, uid, userMessage):
                         ]
                     )
                 )
-            else:
+            elif len(prod) == 3:
                 it = TemplateSendMessage(
                     alt_text='圖片失效or資料庫未有資料',
                     template=ImageCarouselTemplate(
@@ -428,6 +428,95 @@ def message_continuous(countin, uid, userMessage):
                         ]
                     )
                 )
+            elif len(prod) == 4:
+                it = TemplateSendMessage(
+                    alt_text='圖片失效or資料庫未有資料',
+                    template=ImageCarouselTemplate(
+                        columns=[
+                            ImageCarouselColumn(
+                                image_url=prod[0].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[0].pname,
+                                    text=prod[0].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                            ImageCarouselColumn(
+                                image_url=prod[1].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[1].pname,
+                                    text=prod[1].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                            ImageCarouselColumn(
+                                image_url=prod[2].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[2].pname,
+                                    text=prod[2].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                            ImageCarouselColumn(
+                                image_url=prod[3].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[3].pname,
+                                    text=prod[3].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                        ]
+                    )
+                )
+            else:
+                it = TemplateSendMessage(
+                    alt_text='圖片失效or資料庫未有資料',
+                    template=ImageCarouselTemplate(
+                        columns=[
+                            ImageCarouselColumn(
+                                image_url=prod[0].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[0].pname,
+                                    text=prod[0].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                            ImageCarouselColumn(
+                                image_url=prod[1].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[1].pname,
+                                    text=prod[1].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                            ImageCarouselColumn(
+                                image_url=prod[2].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[2].pname,
+                                    text=prod[2].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                            ImageCarouselColumn(
+                                image_url=prod[3].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[3].pname,
+                                    text=prod[3].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            ),
+                            ImageCarouselColumn(
+                                image_url=prod[4].picurl,
+                                action=PostbackTemplateAction(
+                                    label=prod[4].pname,
+                                    text=prod[4].pname,
+                                    data='action=buy&itemid=1'
+                                )
+                            )
+                        ]
+                    )
+                )                
+
             message.append(it)
             updatestate(uid, 1,22)
         except:
