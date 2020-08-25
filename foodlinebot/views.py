@@ -711,6 +711,7 @@ def message_continuous(countin, uid, userMessage):
                 if i == '"':
                     pass
                 else:
+                    i = i.replace('[','')
                     res += i + '\n'
             result = '找到'+userMessage+'的成分了!\n'+res
             message = []
