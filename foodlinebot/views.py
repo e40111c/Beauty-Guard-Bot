@@ -898,37 +898,41 @@ def Compare_All_Product(userid, qName):
         checkIngre = []
         # Start to compare suitable & nonsuitable
         cnt = 0
+        try:
+        
+        
         if len(qIngre) > 0:
-            data = User_Product.objects.filter(uid=userid)
+            try:
+                data = User_Product.objects.filter(uid=userid)
+            except:
+                message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'))
+                cnt += 1
+                break
             for i in range(len(qIngre)):
-                try:
-                    for j in range(len(data)):
-                        if data[j].suitable == '不適合':
-                           unfit_Ingre = data[j].ingredient.split(',')
-                           for k in range(len(unfit_Ingre)):
-                                if unfit_Ingre[k].find(qIngre[i]) != -1:
-                                    checkIngre.append(unfit_Ingre[k])
-                                    break
-                except:
-                    message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'))
-                    cnt += 1
-                    break
+                 for j in range(len(data)):
+                      if data[j].suitable == '不適合':
+                         unfit_Ingre = data[j].ingredient.split(',')
+                         for k in range(len(unfit_Ingre)):
+                              if unfit_Ingre[k] in (qIngre[i]) is True:
+                                       checkIngre.append(unfit_Ingre[k])
+                                       break
+
             for i in range(len(checkIngre)):
                 try:
                     for j in range(len(data)):
                           if data[j].suitable == '適合':
                             fit_Ingre = data[j].ingredient.split(',')
                             for k in range(len(fit_Ingre)):
-                                if fit_Ingre[k].find(checkIngre[i]) != -1:
-                                    checkIngre.remove(fit_Ingre[k])
-                                    break
+                                if fit_Ingre[k] in (checkIngre[i]) is True:
+                                            checkIngre.remove(fit_Ingre[k])
+                                            break
 
                 except:
                     message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的適合產品，再利用比對功能喔！\n'))
                     cnt += 1
                     break
                     
-        if cnt != 1:
+        if cnt != 2:
             try:
                 if len(checkIngre) > 0:
                     message.append(TextSendMessage(text='這個產品有包含過去讓您不適的產品成分，如有需要建議查詢醫生的專業意見喔！'))
