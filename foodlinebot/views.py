@@ -857,8 +857,7 @@ def message_continuous(countin, uid, userMessage):
         message = TextSendMessage(text='請輸入想要比對的產品名稱')
         updatestate(uid, 1, 7)
     elif countin == 7:
-        msg = Compare_All_Product(uid,userMessage)
-        message = TextSendMessage(text=msg)
+        message = Compare_All_Product(uid,userMessage)
         updatestate(uid, 0, 0)
     else:
         updatestate(uid, 0, 0)
