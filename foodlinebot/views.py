@@ -607,8 +607,10 @@ def message_continuous(countin, uid, userMessage):
         res = ''
         result = search_productDB(userMessage)
         if type(result) == str:
-            result = '查無此產品資訊'
-            message = (TextSendMessage(text=result))
+            message = []
+            message.append(TextSendMessage(text=result))
+            message.append(TextSendMessage(text='非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'))
+            message.append(StickerSendMessage(package_id=11538, sticker_id=51626522))
         else:
             sp = result.ingredient.split(',')
             for i in sp:
@@ -616,11 +618,11 @@ def message_continuous(countin, uid, userMessage):
                     pass
                 else:
                     res += i + '\n'
-            result = '已找到'+userMessage+'成分\n'+res
+            result = '找到'+userMessage+'的成分了!\n'+res
             message = []
             message.append(TextSendMessage(text=result))
             message.append(StickerSendMessage(
-                package_id=2, sticker_id=144))
+                package_id=11539, sticker_id=52114116))
         updatestate(uid, 0, 0)
         
     
@@ -762,7 +764,7 @@ def message_continuous(countin, uid, userMessage):
         updatestate(uid, 1, 7)
     elif countin == 7:
         msg = Compare_All_Product(uid,userMessage)
-        message = TextSendMessage(text=msg+'\n\n比對結束!!')
+        message = TextSendMessage(text=msg)
         updatestate(uid, 0, 0)
     else:
         updatestate(uid, 0, 0)
@@ -794,7 +796,7 @@ def search_productDB(productname):
 
 def Compare_All_Product(userid, qName):
     # 從資料庫取得資料
-    msg = ''
+    message = []
     qIngre = []
     try:
         ingred = CosmeticIngredient.objects.get(pname__icontains=qName)
@@ -815,7 +817,7 @@ def Compare_All_Product(userid, qName):
                                     checkIngre.append(unfit_Ingre[k])
                                     break
                 except:
-                    msg += '麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'
+                    message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'))
                     cnt += 1
                     break
             for i in range(len(checkIngre)):
@@ -829,25 +831,28 @@ def Compare_All_Product(userid, qName):
                                     break
 
                 except:
-                    msg += '麻煩請先紀錄您曾經使用過的適合產品，再利用比對功能喔！\n'
+                    message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的適合產品，再利用比對功能喔！\n'))
                     cnt += 1
                     break
                     
         if cnt != 2:
             try:
                 if len(checkIngre) > 0:
-                    msg += '產品有過去讓您不適的成分，如有需要建議查詢醫生的專業意見喔！'
+                    message.append(TextSendMessage(text='這個產品有包含過去讓您不適的產品成分，如有需要建議查詢醫生的專業意見喔！'))
+                    message.append(StickerSendMessage(package_id=11538, sticker_id=51626531))
                 else:
-                    msg += '產品並沒有過去讓您不適的成分，可以考慮購買喔！'
+                    message.append(TextSendMessage(text='這個產品成分與妳現在適用產品成分一樣安全，可以考慮購入哦！'))
+                    message.append(StickerSendMessage(package_id=11539, sticker_id=52114115))
             except:
                 msg += '錯誤發生，請重新點選比對功能！'
         else:
             msg += '查無產品成分'
 
     except:
-        msg += '非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'
+        message.append(TextSendMessage(text='非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'))
+        message.append(StickerSendMessage(package_id=11538, sticker_id=51626522))
 
-    return msg
+    return message
 
 def recommand(uid,userprice):
     msg = ''
