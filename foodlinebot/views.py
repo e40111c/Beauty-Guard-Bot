@@ -602,7 +602,7 @@ def message_continuous(countin, uid, userMessage):
     
     elif countin == 30:
         message = []
-        message.append(TextSendMessage(text='已產品為廣原良保濕霜~儲存成功了哦!'))
+        message.append(TextSendMessage(text='該產品為廣原良保濕霜~儲存成功了哦!'))
         message.append(StickerSendMessage(package_id=11539, sticker_id=52114131))
         updatestate(uid,0,0)
         
