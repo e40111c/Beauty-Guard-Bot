@@ -669,14 +669,14 @@ def message_continuous(countin, uid, userMessage):
                 ]
             )
         )
-       Temp.objects.create(uid=uid,pname=item)
-       updatestate(uid,0,0)
+       #Temp.objects.create(uid=uid,pname=item)
+       updatestate(uid,1,9)
     
     elif countin == 9:
         if userMessage == '儲存商品':
-            item = Temp.objects.get(uid=uid)
-            pro = str(item.pname)
-            User_Product.objects.create(uid=uid,wait_prod=pro)
+            #item = Temp.objects.get(uid=uid)
+            #pro = str(item.pname)
+            #User_Product.objects.create(uid=uid,wait_prod=pro)
             message = []
             message.append(TextSendMessage(text='完成儲存!'))
             message.append(StickerSendMessage(package_id=2, sticker_id=516))
