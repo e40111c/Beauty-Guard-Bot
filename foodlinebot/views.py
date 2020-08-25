@@ -892,7 +892,7 @@ def Compare_All_Product(userid, qName):
     message = []
     qIngre = []
     try:
-        ingred = CosmeticIngredient.objects.filter(pname__icontains=qName)
+        ingred = CosmeticIngredient.objects.filter(pname__contains=qName)
         qIngre = ingred[0].ingredient.split(',')
         unfit = []
         checkIngre = []
