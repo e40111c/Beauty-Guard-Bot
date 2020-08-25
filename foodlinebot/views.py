@@ -898,9 +898,6 @@ def Compare_All_Product(userid, qName):
         checkIngre = []
         # Start to compare suitable & nonsuitable
         cnt = 0
-        try:
-        
-        
         if len(qIngre) > 0:
             try:
                 data = User_Product.objects.filter(uid=userid)
