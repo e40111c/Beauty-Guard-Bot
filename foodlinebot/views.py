@@ -875,22 +875,15 @@ def message_continuous(countin, uid, userMessage):
     elif countin == 12:
         message = []     
         msg = ''
-        price2 = recommand(uid, userMessage)
-        prob = Temp.objects.filter(uid = uid)
-        result = []
-        for i in range(len(price2)):
-            for j in range(len(prob)):
-                if price2[i] == prob[j].price:
-                    result.append(prob[j])
-                    
+        result = recommand(uid, userMessage)          
         if not result:
             message.append(TextSendMessage(text='沒有可推薦的商品，抱歉!'))
-        elif len(price2)<3:
+        elif len(result)<3:
             for i in range(len(result)):
-                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(price2[i].price)+'\n'
+                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
         else:
             for i in range(3):
-                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(price2[i].price)+'\n'
+                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
             message.append(TextSendMessage(text='以下是我們根據系統分析後推薦給你的商品'))
             message.append(TextSendMessage(text=msg))
             message.append(StickerSendMessage(package_id=1, sticker_id=13))
@@ -1074,8 +1067,16 @@ def recommand(uid,userprice):
                 temp4=brand[i]
                 brand[i]=brand[j]
                 brand[j]=temp4    
-        
-        
+    Temp.objects.all().delete()
+    for i in range(len(price2)):
+        Temp.objects.create(
+                uid=uid,
+                pname=pname[i],
+                price=price2[i],
+                brand=brand[i]
+            )
+    product = Temp.objects.filter(uid=uid)
+    
         
     """   
     for i in range(len(price2)):
@@ -1103,7 +1104,7 @@ def recommand(uid,userprice):
                         product[i].brand = product[j].brand
                         product[j].brand = temp4
     """                    
-    return price2
+    return product
 
 
 def qrcode_detail(qrscan):
