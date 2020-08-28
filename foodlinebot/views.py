@@ -324,11 +324,11 @@ def message_continuous(countin, uid, userMessage):
             items=[
                     QuickReplyButton(
                         image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/13898481211537356036-512.png',
-                        action=MessageAction(label="紀錄產品", text="進入儲存流程")
+                        action=MessageAction(label="紀錄產品", text="儲存產品")
                         ),
                     QuickReplyButton(
                         image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/2790131631558965374-512.png',
-                        action=MessageAction(label="刪除產品", text="進入刪除流程")
+                        action=MessageAction(label="刪除產品", text="刪除產品")
                     )
                 ]
             )
