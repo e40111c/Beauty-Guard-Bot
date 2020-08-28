@@ -873,17 +873,27 @@ def message_continuous(countin, uid, userMessage):
     
     
     elif countin == 12:
-        message = []
-        try:
-            result = recommand(uid, userMessage)
-            message.append(TextSendMessage(text='以下是我們根據系統分析後推薦給你的商品'))
-            msg = ''
+        message = []     
+        msg = ''
+        price2 = recommand(uid, userMessage)
+        prob = Temp.objects.filter(uid = uid)
+        result = []
+        for i in range(len(price2)):
+            for j in range(len(prob)):
+                if price2[i] == prob[j].price:
+                    result.append(prob[j])
+                    
+        if not result:
+            message.append(TextSendMessage(text='沒有可推薦的商品，抱歉!'))
+        elif len(result)<3:
+            for i in range(len(result)):
+                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
+        else:
             for i in range(3):
                 msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
+            message.append(TextSendMessage(text='以下是我們根據系統分析後推薦給你的商品'))
             message.append(TextSendMessage(text=msg))
             message.append(StickerSendMessage(package_id=1, sticker_id=13))
-        except:
-            message.append(TextSendMessage(text='沒有可推薦的商品，抱歉!'))
             
         Temp.objects.all().delete()
         updatestate(uid, 0, 0)
@@ -1016,18 +1026,58 @@ def Compare_All_Product(userid, qName):
 def recommand(uid,userprice):
     msg = ''
     product = Temp.objects.filter(uid=uid)# 放產品名
-    #com = ['hime', 'hina', 'tanaka', 'tsuzuki', 'himehina']  # 放產品名
-    #brand = []  # 放品牌名
-    #price = [1, 9, 5, 4, 7]  # 放價格
+    pname = []
+    price = []
+    brand = []
+    for i in range(len(product)):
+        pname.append(product[i].pname)
+        price.append(product[i].price)
+        brand.append(product[i].brand)
+
     price2 = []
     usp = int(userprice)
-    #inputprice = 5  # 使用者輸入價格
+    deletprice=[]
     
+    cnt=0
     for i in range(len(product)):
-            pr = product[i].price
-            x = (usp - product[i].price) * (usp - product[i].price)
-            price2.append(x)
-            
+        x=(inputprice-price[i])
+        if x<-200:
+            pname.remove(pname[i-cnt])
+            brand.remove(brand[i-cnt])
+            a=price[i]
+            deletprice.append(a)
+            cnt+=1
+            continue
+        y=x*x
+        price2.append(y)
+    
+    
+    
+    #for i in range(len(product)):
+     #       pr = product[i].price
+      #      x = (usp - product[i].price) * (usp - product[i].price)
+       #     price2.append(x)
+    for i in range(len(deletprice)):
+        price.remove(deletprice[i])
+    for i in range(len(price2)):
+        for j in range(len(price2)):
+            if price2[i]<price2[j]:
+                temp=price2[i]
+                price2[i]=price2[j]
+                price2[j]=temp
+                temp2=pname[i]
+                pname[i]=pname[j]
+                pname[j]=temp2
+                temp3=price[i]
+                price[i]=price[j]
+                price[j]=temp3
+                temp4=brand[i]
+                brand[i]=brand[j]
+                brand[j]=temp4    
+        
+        
+        
+    """   
     for i in range(len(price2)):
         for j in range(len(price2)):
                 if price2[i] < price2[j]:
@@ -1052,8 +1102,8 @@ def recommand(uid,userprice):
                     else:
                         product[i].brand = product[j].brand
                         product[j].brand = temp4
-                        
-    return product
+    """                    
+    return price2
 
 
 def qrcode_detail(qrscan):
