@@ -387,7 +387,7 @@ def message_continuous(countin, uid, userMessage):
     
     elif countin == 21:
         User_Product.objects.get(uid=uid,unfit_prod=userMessage).delete()
-        message = TextSendMessage(text='已將'+userMessage+'刪除成功!)
+        message = TextSendMessage(text='已將'+userMessage+'刪除成功!')
         updatestate(uid, 0, 0)
     
     elif countin == 22:
