@@ -381,37 +381,35 @@ def message_continuous(countin, uid, userMessage):
                         ]
                     )
                 )
-            updatestate(uid, 1, 21)
-        else:
-            message = TextSendMessage(text='進入產品儲存流程')
             updatestate(uid, 1, 22)
-    
-    
-    elif countin == 21:
-        User_Product.objects.get(uid=uid,unfit_prod=userMessage).delete()
-        message = TextSendMessage(text='已將'+userMessage+'刪除成功!')
-        updatestate(uid, 0, 0)
+        else:
+            updatestate(uid, 1, 22)
+
     
     elif countin == 22:
-        message = TextSendMessage(text='請問需要紀錄的是哪一種產品，請選擇該產品是否與自身合適',quick_reply=QuickReply(
-            items=[
-                    QuickReplyButton(
-                        image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/13126182031582884276-512.png',
-                        action=MessageAction(label="適合產品", text="適合產品")
+        if userMessage == '儲存產品'
+            message = TextSendMessage(text='請問需要紀錄的是哪一種產品，請選擇該產品是否與自身合適',quick_reply=QuickReply(
+                items=[
+                        QuickReplyButton(
+                            image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/13126182031582884276-512.png',
+                            action=MessageAction(label="適合產品", text="適合產品")
+                            ),
+                        QuickReplyButton(
+                            image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/16618812301557740370-512.png',
+                            action=MessageAction(label="不適合產品", text="不適合產品")
                         ),
-                    QuickReplyButton(
-                        image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/16618812301557740370-512.png',
-                        action=MessageAction(label="不適合產品", text="不適合產品")
-                    ),
-                    QuickReplyButton(
-                        image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/9411509341557740371-512.png',
-                        action=MessageAction(label="不確定產品", text="不確定產品")
-                    )
-                ]
+                        QuickReplyButton(
+                            image_url='https://upload-icon.s3.us-east-2.amazonaws.com/uploads/icons/png/9411509341557740371-512.png',
+                            action=MessageAction(label="不確定產品", text="不確定產品")
+                        )
+                    ]
+                )
             )
-        )
-        updatestate(uid, 1, 23)
-        
+            updatestate(uid, 1, 23)
+        else:
+            User_Product.objects.get(uid=uid,unfit_prod=userMessage).delete()
+            message = TextSendMessage(text='已將'+userMessage+'刪除成功!')
+            updatestate(uid, 0, 0)
     
     elif countin == 23:
         Temp.objects.create(uid=uid, product=userMessage)
