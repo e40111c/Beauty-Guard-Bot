@@ -885,12 +885,12 @@ def message_continuous(countin, uid, userMessage):
                     
         if not result:
             message.append(TextSendMessage(text='沒有可推薦的商品，抱歉!'))
-        elif len(result)<3:
+        elif len(price2)<3:
             for i in range(len(result)):
-                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
+                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(price2[i].price)+'\n'
         else:
             for i in range(3):
-                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(result[i].price)+'\n'
+                msg += str(i+1)+'.產品名稱:'+str(result[i].pname)+'\n品牌:'+str(result[i].brand)+'\n價格:'+str(price2[i].price)+'\n'
             message.append(TextSendMessage(text='以下是我們根據系統分析後推薦給你的商品'))
             message.append(TextSendMessage(text=msg))
             message.append(StickerSendMessage(package_id=1, sticker_id=13))
