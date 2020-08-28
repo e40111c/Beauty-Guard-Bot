@@ -383,6 +383,7 @@ def message_continuous(countin, uid, userMessage):
                 )
             updatestate(uid, 1, 21)
         else:
+            message = TextSendMessage(text='進入產品儲存流程')
             updatestate(uid, 1, 22)
     
     
