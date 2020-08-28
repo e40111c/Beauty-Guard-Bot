@@ -1040,7 +1040,7 @@ def recommand(uid,userprice):
     
     cnt=0
     for i in range(len(product)):
-        x=(inputprice-price[i])
+        x=(usp-price[i])
         if x<-200:
             pname.remove(pname[i-cnt])
             brand.remove(brand[i-cnt])
