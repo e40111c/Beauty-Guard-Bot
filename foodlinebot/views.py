@@ -383,11 +383,12 @@ def message_continuous(countin, uid, userMessage):
                 )
             updatestate(uid, 1, 22)
         else:
+            message = TextSendMessage(text='進入儲存產品流程')
             updatestate(uid, 1, 22)
 
     
     elif countin == 22:
-        if userMessage == '儲存產品':
+        if userMessage == '進入儲存產品流程':
             message = TextSendMessage(text='請問需要紀錄的是哪一種產品，請選擇該產品是否與自身合適',quick_reply=QuickReply(
                 items=[
                         QuickReplyButton(
