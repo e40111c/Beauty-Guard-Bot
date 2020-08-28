@@ -291,7 +291,6 @@ def callback(request):
                         line_bot_api.reply_message(event.reply_token, message)
 
                     if (status.continuous == 0 and status.cnt == 0):
-                        message = TextSendMessage(text='無效的訊息，請確認指令後再輸入')
                         updatestate(uid, 0, 0)
                         line_bot_api.reply_message(event.reply_token, message)
                     else:
@@ -338,13 +337,13 @@ def message_continuous(countin, uid, userMessage):
     
     elif countin == 20:
         if userMessage == '刪除產品':
-            items = User_Product.objects.filter(uid=uid)
             if len(items) == 1:
+                itname = items[0].unfit_prod
                 message = TextSendMessage(text='以下是您已經儲存的產品，請點擊該產品進行刪除',quick_reply=QuickReply(
                     items=[
                             QuickReplyButton(
                                 image_url='',
-                                action=MessageAction(label=items[0].unfit_prod[:10], text="刪除成功")
+                                action=MessageAction(label=items[0].unfit_prod[:10], text=items[0].unfit_prod[:10])
                                 )
                         ]
                     )
@@ -354,11 +353,11 @@ def message_continuous(countin, uid, userMessage):
                     items=[
                             QuickReplyButton(
                                 image_url='',
-                                action=MessageAction(label=items[0].unfit_prod[:10], text="刪除成功")
+                                action=MessageAction(label=items[0].unfit_prod[:10], text=items[0].unfit_prod[:10])
                                 ),
                             QuickReplyButton(
                                 image_url='',
-                                action=MessageAction(label=items[1].unfit_prod[:10], text="刪除成功")
+                                action=MessageAction(label=items[1].unfit_prod[:10], text=items[1].unfit_prod[:10])
                                 ),
                         ]
                     )
@@ -368,24 +367,30 @@ def message_continuous(countin, uid, userMessage):
                     items=[
                             QuickReplyButton(
                                 image_url='',
-                                action=MessageAction(label=items[0].unfit_prod[:10], text="刪除成功")
+                                action=MessageAction(label=items[0].unfit_prod[:10], text=items[0].unfit_prod[:10])
                                 ),
                             QuickReplyButton(
                                 image_url='',
-                                action=MessageAction(label=items[1].unfit_prod[:10], text="刪除成功")
+                                action=MessageAction(label=items[1].unfit_prod[:10], text=items[1].unfit_prod[:10])
                                 ),
                             QuickReplyButton(
                                 image_url='',
-                                action=MessageAction(label=items[2].unfit_prod[:10], text="刪除成功")
+                                action=MessageAction(label=items[2].unfit_prod[:10], text=items[2].unfit_prod[:10])
                                 )
                         ]
                     )
                 )
-            updatestate(uid, 0, 0)
-        else:
             updatestate(uid, 1, 21)
+        else:
+            updatestate(uid, 1, 22)
+    
     
     elif countin == 21:
+        User_Product.objects.get(uid=uid,unfit_prod=userMessage).delete()
+        message = TextSendMessage(text='已將'+userMessage+'刪除成功!)
+        updatestate(uid, 0, 0)
+    
+    elif countin == 22:
         message = TextSendMessage(text='請問需要紀錄的是哪一種產品，請選擇該產品是否與自身合適',quick_reply=QuickReply(
             items=[
                     QuickReplyButton(
@@ -403,15 +408,15 @@ def message_continuous(countin, uid, userMessage):
                 ]
             )
         )
-        updatestate(uid, 1, 22)
-        
-    
-    elif countin == 22:
-        Temp.objects.create(uid=uid, product=userMessage)
-        message = TextSendMessage(text='請輸入品牌名稱')
         updatestate(uid, 1, 23)
         
+    
     elif countin == 23:
+        Temp.objects.create(uid=uid, product=userMessage)
+        message = TextSendMessage(text='請輸入品牌名稱')
+        updatestate(uid, 1, 24)
+        
+    elif countin == 24:
         prod = []
         try:
             userpro = CosmeticProduct.objects.filter(brand__icontains=userMessage)
@@ -585,14 +590,14 @@ def message_continuous(countin, uid, userMessage):
                 )                
 
             message.append(it)
-            updatestate(uid, 1,24)
+            updatestate(uid, 1,25)
         except:
             message = []
             message.append(TextSendMessage(text='找不到相關產品的資訊，非常抱歉!'))
             message.append(StickerSendMessage(package_id=11537,sticker_id=52002755))
             updatestate(uid,0,0)
     
-    elif countin == 24:
+    elif countin == 25:
             pnamepic = CosmeticProduct.objects.get(pname=userMessage)
             if pnamepic.id > 2400:
                 de = pnamepic.id-2000
