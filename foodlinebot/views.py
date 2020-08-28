@@ -1012,7 +1012,7 @@ def Compare_All_Product(userid, qName):
                                             break
 
                     
-        if cnt == 0:
+        if cnt != 1:
             try:
                 if len(checkIngre) > 0:
                     msg = ''
