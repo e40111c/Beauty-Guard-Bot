@@ -1072,7 +1072,7 @@ def recommand(uid,userprice):
         Temp.objects.create(
                 uid=uid,
                 pname=pname[i],
-                price=price2[i],
+                price=price[i],
                 brand=brand[i]
             )
     product = Temp.objects.filter(uid=uid)
