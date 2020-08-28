@@ -980,22 +980,24 @@ def Compare_All_Product(userid, qName):
         if len(qIngre) > 0:
             try:
                 data = User_Product.objects.filter(uid=userid)
+                if data[j].suitable == '不適合': cnt+=1
+                for i in range(len(qIngre)):
+                    for j in range(len(data)):
+                        if data[j].suitable == '不適合':
+                             unfit_Ingre = data[j].ingredient.split(',')
+                             try:
+                                 if unfit_Ingre.index('') != -1: unfit_Ingre.remove('')
+                             except:
+                                 pass
+                             for k in range(len(unfit_Ingre)):
+                                  if unfit_Ingre[k] in (qIngre[i]) is True:
+                                          checkIngre.append(unfit_Ingre[k])
+                                          checkProd.append(data[k].unfit_prod) 
+                                          break
             except:
                 message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'))
-                cnt += 1
-            for i in range(len(qIngre)):
-                 for j in range(len(data)):
-                      if data[j].suitable == '不適合':
-                         unfit_Ingre = data[j].ingredient.split(',')
-                         try:
-                             if unfit_Ingre.index('') != -1: unfit_Ingre.remove('')
-                         except:
-                             pass
-                         for k in range(len(unfit_Ingre)):
-                              if unfit_Ingre[k] in (qIngre[i]) is True:
-                                      checkIngre.append(unfit_Ingre[k])
-                                      checkProd.append(data[k].unfit_prod)
-                                      break
+
+            
 
             for i in range(len(checkIngre)):
                  for j in range(len(data)):
@@ -1012,7 +1014,7 @@ def Compare_All_Product(userid, qName):
                                             break
 
                     
-        if cnt != 1:
+        if cnt == 1:
             try:
                 if len(checkIngre) > 0:
                     msg = ''
