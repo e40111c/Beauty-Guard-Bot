@@ -336,7 +336,7 @@ def message_continuous(countin, uid, userMessage):
         )
         updatestate(uid, 1, 20)
     
-    elif countin = 20:
+    elif countin == 20:
         if userMessage == '刪除產品':
             items = User_Product.objects.filter(uid=uid)
             if len(items) == 1:
@@ -385,7 +385,7 @@ def message_continuous(countin, uid, userMessage):
         else:
             updatestate(uid, 1, 21)
     
-    elif countin = 21:
+    elif countin == 21:
         message = TextSendMessage(text='請問需要紀錄的是哪一種產品，請選擇該產品是否與自身合適',quick_reply=QuickReply(
             items=[
                     QuickReplyButton(
