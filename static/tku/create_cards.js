@@ -63,6 +63,13 @@ for(var i = 0; i < products.length; i++) {
         
         for(var j = 0; j < ingre.length; j++){
             //need loop for ingredient start from here
+            ingre[j] = String(ingre[j])
+            ewg[j] = String(ewg[j])
+            ace[j] = String(ace[j])
+            dal[j] = String(dal[j])
+            stimulation[j] = String(stimulation[j])
+            saf[j] = String(saf[j])
+
             ewg[j] = ewg[j].replace('[','');
             ewg[j] = ewg[j].replace(']','');
             ewg[j] = ewg[j].replace('\'','');
