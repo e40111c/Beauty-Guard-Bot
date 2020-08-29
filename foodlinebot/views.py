@@ -1024,8 +1024,10 @@ def Compare_All_Product(userid, qName):
                 else:
                     message.append(TextSendMessage(text='這個產品成分與妳現在適用產品成分一樣安全，可以考慮購入哦！'))
                     message.append(StickerSendMessage(package_id=11539, sticker_id=52114115))
-            except:
+            except Exception as e:
                 message.append(TextSendMessage(text='產品查詢成分錯誤發生，請回報'))
+                message.append(TextSendMessage(text=str(e)))
+                
         else:
             message.append(TextSendMessage(text='查無產品成分'))
 
