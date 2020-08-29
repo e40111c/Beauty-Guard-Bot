@@ -978,7 +978,7 @@ def Compare_All_Product(userid, qName):
         unfitprod = []
 
 
-        """
+        
         if len(qIngre) > 0:
             try:
                 data = User_Product.objects.filter(uid=userid)
@@ -1010,9 +1010,9 @@ def Compare_All_Product(userid, qName):
                             checkIngre.remove(qIngre[i])
                     except:
                         pass
-        """
+        
 
-        if found == -1:
+        if found == 1:
             try:
                 if len(checkIngre) > 0:
                     
