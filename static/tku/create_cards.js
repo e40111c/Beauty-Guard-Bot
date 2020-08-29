@@ -72,22 +72,20 @@ for(var i = 0; i < products.length; i++) {
 
             ewg[j] = ewg[j].replace('[','');
             ewg[j] = ewg[j].replace(']','');
-            ewg[j] = ewg[j].replace('\'','');
             ingre[j] = ingre[j].replace('[','');
             ingre[j] = ingre[j].replace(']','');
-            ingre[j] = ingre[j].replace('\'','');
             ace[j] = ace[j].replace('[','');
             ace[j] = ace[j].replace(']','');
-            ace[j] = ace[j].replace('\'','');
+
             dal[j] = dal[j].replace('[','');
             dal[j] = dal[j].replace(']','');
-            dal[j] = dal[j].replace('\'','');
+
             stimulation[j] = stimulation[j].replace('[','');
             stimulation[j] = stimulation[j].replace(']','');
-            stimulation[j] = stimulation[j].replace('\'','');
+
             saf[j] = saf[j].replace('[','');
             saf[j] = saf[j].replace(']','');
-            saf[j] = saf[j].replace('\'','');
+
 
             html_card += "<tbody class = \"table_row\"><tr>";
             html_card += "<th scope=\"row\">"+ingre[j]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j]+"</td></tr>";
