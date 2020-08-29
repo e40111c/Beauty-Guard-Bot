@@ -1014,10 +1014,10 @@ def Compare_All_Product(userid, qName):
 
         if found == 1:
             try:
-                if len(checkIngre) > 0:
-                    
-                    if len(checkProd) > 0:
-                        msg += checkProd+'\n'
+                msg = ''
+                if len(checkProd) > 0:
+                    for i in range(len(checkProd)):
+                        msg += checkProd[i]+'\n'
                     message.append(TextSendMessage(text='這個產品有包含過去讓您不適的產品成分，如有需要建議查詢醫生的專業意見喔！'))
                     message.append(TextSendMessage(text='以下這些商品的成分與這產品成分皆會造成您的不適\n'+msg))
                     message.append(StickerSendMessage(package_id=11538, sticker_id=51626531))
