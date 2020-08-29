@@ -965,56 +965,55 @@ def Compare_All_Product(userid, qName):
     # 從資料庫取得資料
     message = []
     qIngre = []
+    found = -1
     try:
         ingred = CosmeticIngredient.objects.filter(pname__contains=qName)
         qIngre = ingred[0].ingredient.split(',')
-        try:
-            if qIngre.index('') != -1: qIngre.remove('')
-        except:
-            pass
+        if qIngre.index('') != -1: qIngre.remove('')
+        found = 1
         unfit = []
         checkIngre = []
         checkProd = []
         # Start to compare suitable & nonsuitable
-        cnt = 0
+        fitprod = []
+        unfitprod = []
+
+
+        
         if len(qIngre) > 0:
             try:
                 data = User_Product.objects.filter(uid=userid)
-                if data[j].suitable == '不適合': cnt+=1
+                for i in range(len(data)):
+                    if data[i].suitable == '不適合':
+                        unfitprod.append(data[i])
+                    else:
+                        fitprod.append(data[i])
                 for i in range(len(qIngre)):
-                    for j in range(len(data)):
-                        if data[j].suitable == '不適合':
-                             unfit_Ingre = data[j].ingredient.split(',')
-                             try:
-                                 if unfit_Ingre.index('') != -1: unfit_Ingre.remove('')
-                             except:
-                                 pass
-                             for k in range(len(unfit_Ingre)):
-                                  if unfit_Ingre[k] in (qIngre[i]) is True:
-                                          checkIngre.append(unfit_Ingre[k])
-                                          checkProd.append(data[k].unfit_prod) 
-                                          break
+                    for j in range(len(unfitprod)):
+                        try:
+                            unsafe = unfitprod[j].ingredient.find(qIngre[i])   
+                            if unsafe != -1:
+                                checkProd.append(unfitprod[j].unfit_prod)      
+                                checkIngre.append(qIngre[i])            
+                        except:
+                            pass
             except:
-                message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的不適合產品，再利用比對功能喔！\n'))
-
+                message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的產品，再利用比對功能喔！\n'))
+        
             
 
             for i in range(len(checkIngre)):
-                 for j in range(len(data)):
-                      if data[j].suitable == '適合':
-                            fit_Ingre = data[j].ingredient.split(',')
-                            try:
-                                if fit_Ingre.index('') != -1: fit_Ingre.remove('')
-                            except:
-                                pass
-                            for k in range(len(fit_Ingre)):
-                                if fit_Ingre[k] in (checkIngre[i]) is True:
-                                            checkIngre.remove(fit_Ingre[k])
-                                            checkProd.remove(data[k].unfit_prod)
-                                            break
+                 for j in range(len(fitprod)):
+                    try:
+                        safe = fitprod[j].ingredient.find(qIngre[i])
+                        if safe != -1:
+                            checkProd.remove(fitprod[j].unfit_prod)
+                            checkIngre.remove(qIngre[i])
+                    except:
+                        pass
 
                     
-        if cnt == 1:
+        if found == 1:
             try:
                 if len(checkIngre) > 0:
                     msg = ''
