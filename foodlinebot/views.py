@@ -1017,6 +1017,8 @@ def Compare_All_Product(userid, qName):
             try:
                 msg = ''
                 if len(checkProd) > 0:
+                    unique_set = set(checkProd)
+                    checkProd = list(unique_set)
                     for i in range(len(checkProd)):
                         msg += checkProd[i]+'\n'
                     message.append(TextSendMessage(text='這個產品有包含過去讓您不適的產品成分，如有需要建議查詢醫生的專業意見喔！'))
