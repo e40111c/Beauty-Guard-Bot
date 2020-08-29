@@ -60,9 +60,13 @@ for(var i = 0; i < products.length; i++) {
         var stimulation = products[i].fields.stimulation.split(',')
         var saf = products[i].fields.safeness.split(',');
         //以上測試用,連資料庫後,需刪除
-
+        
         for(var j = 0; j < ingre.length; j++){
             //need loop for ingredient start from here
+            ingre[j] = ingre[j].replace('[','')
+            ingre[j] = ingre[j].replace(']','')
+            ingre[j] = ingre[j].replace('\'','')
+
             html_card += "<tbody class = \"table_row\"><tr>";
             html_card += "<th scope=\"row\">"+ingre[j]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j]+"</td></tr>";
             //end loop
