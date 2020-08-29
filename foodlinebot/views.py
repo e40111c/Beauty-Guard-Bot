@@ -1020,7 +1020,7 @@ def Compare_All_Product(userid, qName):
                     unique_set = set(checkProd)
                     checkProd = list(unique_set)
                     for i in range(len(checkProd)):
-                        msg += str(i)+'.'+checkProd[i]+'\n'
+                        msg += str(i+1)+'.'+checkProd[i]+'\n'
                     message.append(TextSendMessage(text='這個產品有包含過去讓您不適的產品成分，如有需要建議查詢醫生的專業意見喔！'))
                     message.append(TextSendMessage(text='以下商品成分與輸入商品成分皆會造成不適\n'+msg))
                     message.append(StickerSendMessage(package_id=11538, sticker_id=51626531))
