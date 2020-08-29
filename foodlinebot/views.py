@@ -1011,11 +1011,11 @@ def Compare_All_Product(userid, qName):
                     except:
                         pass
         """
-                    
+
         if found == -1:
             try:
                 if len(checkIngre) > 0:
-                    msg = ''
+                    
                     if len(checkProd) > 0:
                         msg += checkProd+'\n'
                     message.append(TextSendMessage(text='這個產品有包含過去讓您不適的產品成分，如有需要建議查詢醫生的專業意見喔！'))
@@ -1025,9 +1025,9 @@ def Compare_All_Product(userid, qName):
                     message.append(TextSendMessage(text='這個產品成分與妳現在適用產品成分一樣安全，可以考慮購入哦！'))
                     message.append(StickerSendMessage(package_id=11539, sticker_id=52114115))
             except:
-                msg += '錯誤發生，請重新點選比對功能！'
+                message.append(TextSendMessage(text='產品查詢成分錯誤發生，請回報'))
         else:
-            msg += '查無產品成分'
+            message.append(TextSendMessage(text='查無產品成分'))
 
     except Exception as e:
         message.append(TextSendMessage(text='非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'))
