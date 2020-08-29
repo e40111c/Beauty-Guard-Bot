@@ -967,8 +967,8 @@ def Compare_All_Product(userid, qName):
     qIngre = []
     found = -1
     qName = str(qName)
-    try:
-        ingred = CosmeticIngredient.objects.filter(pname__icontains=qName)
+    ingred = CosmeticIngredient.objects.filter(pname__icontains=qName)
+    if len(ingred)>0:
         qIngre = ingred[0].ingredient.split(',')
         found = 1
         unfit = []
@@ -1030,7 +1030,7 @@ def Compare_All_Product(userid, qName):
         else:
             msg += '查無產品成分'
 
-    except:
+    else:
         message.append(TextSendMessage(text='非常抱歉！我們暫時沒有收錄這款產品，如果您願意的話可以回報給客服喔！\n'))
         message.append(StickerSendMessage(package_id=11538, sticker_id=51626522))
 
