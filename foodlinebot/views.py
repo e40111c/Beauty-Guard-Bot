@@ -996,8 +996,9 @@ def Compare_All_Product(userid, qName):
                                 checkIngre.append(qIngre[i])            
                         except:
                             pass
-            except:
+            except Exception as e:
                 message.append(TextSendMessage(text='麻煩請先紀錄您曾經使用過的產品，再利用比對功能喔！\n'))
+                message.append(TextSendMessage(text=str(e)))
         
             
 
