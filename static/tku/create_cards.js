@@ -59,6 +59,7 @@ for(var i = 0; i < products.length; i++) {
         var dal = products[i].fields.dalton.split(',');
         var stimulation = products[i].fields.stimulation.split(',')
         var saf = products[i].fields.safeness.split(',');
+        
         //以上測試用,連資料庫後,需刪除
         
         for(var j = 0; j < ingre.length; j++){
@@ -74,6 +75,7 @@ for(var i = 0; i < products.length; i++) {
             ewg[j] = ewg[j].replace(']','');
             ingre[j] = ingre[j].replace('[','');
             ingre[j] = ingre[j].replace(']','');
+            ingre[j] = ingre[j].replace('\'','');
             ace[j] = ace[j].replace('[','');
             ace[j] = ace[j].replace(']','');
 
