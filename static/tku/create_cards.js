@@ -76,8 +76,8 @@ for(var i = 0; i < products.length; i++) {
                 
             ingre[j] = ingre[j].replace('[','');
             ingre[j] = ingre[j].replace(']','');
-            ingre[j] = String(ingre[j]);
-            ij = ingre[j].substring(1,5);
+            ij = ingre[j].substr(1,5);
+                
             ace[j] = ace[j].replace('[','');
             ace[j] = ace[j].replace(']','');
 
