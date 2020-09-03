@@ -73,9 +73,10 @@ for(var i = 0; i < products.length; i++) {
 
             ewg[j] = ewg[j].replace('[','');
             ewg[j] = ewg[j].replace(']','');
+                
             ingre[j] = ingre[j].replace('[','');
             ingre[j] = ingre[j].replace(']','');
-            
+            ingre[j] = ingre[j].substring(1,5);
             ace[j] = ace[j].replace('[','');
             ace[j] = ace[j].replace(']','');
 
