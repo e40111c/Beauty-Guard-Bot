@@ -75,7 +75,7 @@ for(var i = 0; i < products.length; i++) {
             ewg[j] = ewg[j].replace(']','');
             ingre[j] = ingre[j].replace('[','');
             ingre[j] = ingre[j].replace(']','');
-            ingre[j] = ingre[j].replace('\'','');
+            ingre[j] = ingre[j].substring(1, 5);
             ace[j] = ace[j].replace('[','');
             ace[j] = ace[j].replace(']','');
 
@@ -90,7 +90,7 @@ for(var i = 0; i < products.length; i++) {
 
 
             html_card += "<tbody class = \"table_row\"><tr>";
-            html_card += "<th scope=\"row\">"+ingre[j]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j]+"</td></tr>";
+            html_card += "<th scope=\"row\">"+ingre[j][1:]+"</th><td>"+ewg[j]+"</td><td>"+ace[j]+"</td><td>"+dal[j]+"</td><td>"+stimulation[j]+"</td><td>"+saf[j]+"</td></tr>";
             //end loop
         }
         html_card += "</tbody></table></div></div>";
