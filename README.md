@@ -1,4 +1,4 @@
-# LinebotProject 美妝守門人 - 淡江資管專題成果
+# LinebotProject 資管專題成果
 
 主機：GCP的虛擬主機 Ubuntu 20 
 
