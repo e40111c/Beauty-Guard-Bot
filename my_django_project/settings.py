@@ -25,7 +25,7 @@ SECRET_KEY = 'vwujk(2znacf144jxc!j_dp4y9ng$#n)l(3$qt&miti-4l_b^x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.201.170.18','lee.tku3a.nctu.me','*']
+ALLOWED_HOSTS = ['35.201.170.18','lee.tku3a.nctu.me','*','tku.ddns.net']
 
 LINE_CHANNEL_ACCESS_TOKEN = 'mF8XfNGnBFXblilpRNO/r8zOltX1OgAeT1EAJzvwU7Euvn2nEEuZM0NzfemF8c4XQwM+IPE+QjR0IN2hjNyhBu0lKjX86ow7O3EgI2BPoKu7lkKWGqnKPy71wotv5K7ARrr6PC8i8/82zWHpyYhMAgdB04t89/1O/w1cDnyilFU='
  
