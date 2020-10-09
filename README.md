@@ -1,6 +1,6 @@
 # LinebotProject 資管專題成果
 
-主機：GCP的虛擬主機 Ubuntu 20  
+主機：GCP Virtual Machine =>  Ubuntu 20.0 version
 
 Server：Apache Server + Https連線
 
