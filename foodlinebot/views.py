@@ -691,7 +691,7 @@ def message_continuous(countin, uid, userMessage):
                 text='點擊後可隨意瀏覽已儲存商品種類',
                 actions=[
                     URITemplateAction(
-                        label='開啟頁面', uri='https://lee.tku3a.nctu.me/hello/'
+                        label='開啟頁面', uri='https://tku3a.ddns.net/hello/'
                     )
                 ]
             )
