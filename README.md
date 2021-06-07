@@ -2,7 +2,7 @@
 
 美妝守門人，協助使用者選購適合自身膚質的美妝品。
 
-Beauty guard bot providing best selection for user
+Beauty guard bot provide best selection for user
 
 > 選購保養/彩妝品總是擔心成分有問題嗎？不曉得這款產品是否適合自己的皮膚，會不會產生過敏等不良反應呢？
 
