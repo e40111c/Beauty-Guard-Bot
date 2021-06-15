@@ -37,6 +37,13 @@ alt="圖片 ALT 文字放在這裡" width="500" height="300" border="10" /></a>
 
 3.bot儲存 使用內部功能儲存。
 
+## Demo Video
+
+<div align=center>
+<a href="https://www.youtube.com/watch?v=7FDZ1kMjhP8" target="_blank"><img src="https://github.com/e40111c/LinebotProject/blob/master/static/demo.png" 
+alt="圖片 ALT 文字放在這裡" width="500" height="300" border="10" /></a>
+</div>
+
 ### 比對功能
 
 輸入想要比對的商品後，系統自動與資料庫產品成分進行比對並加以分析後給出是否建議購入的回饋。
